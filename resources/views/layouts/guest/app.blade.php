@@ -8,7 +8,7 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    @include('layouts.guest')
+    @include('layouts.guest.css')
 
 </head>
 
