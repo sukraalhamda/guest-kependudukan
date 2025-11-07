@@ -23,25 +23,83 @@
 
 <style>
     .whatsapp-float {
-            position: fixed;
-            width: 55px;
-            height: 55px;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25D366;
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-            transition: 0.3s;
-        }
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            background-color: #1ebe5d;
-        }
+        position: fixed;
+        width: 55px;
+        height: 55px;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25D366;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        transition: 0.3s;
+    }
+
+    .whatsapp-float:hover {
+        transform: scale(1.1);
+        background-color: #1ebe5d;
+    }
+
+    .kk-barber-card {
+    background: #1c1e22;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    transition: 0.3s ease;
+}
+
+.kk-barber-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+}
+
+.kk-barber-image {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+
+.kk-barber-body {
+    padding: 15px;
+    text-align: center;
+}
+
+.kk-title {
+    font-size: 17px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff;
+}
+
+.kk-desc {
+    font-size: 14px;
+    margin-top: 4px;
+    color: #ff4d4d;
+}
+
+.kk-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.kk-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    border: none;
+    transition: 0.2s;
+}
+
+.kk-btn:hover {
+    opacity: .85;
+    transform: translateY(-2px);
+}
 </style>
