@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\KeluargaKKController;
@@ -29,3 +30,14 @@ Route::get('/contact', function () {
 Route::get('/service', function () {
     return view('pages.service');
 })->name('service');
+
+// Halaman Login
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+// Halaman Registrasi
+Route::get('/signup', [AuthController::class, 'showRegistrationForm'])->name('signup');
+Route::post('/signup', [AuthController::class, 'register'])->name('signup.post');
+
+// Proses Logout
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

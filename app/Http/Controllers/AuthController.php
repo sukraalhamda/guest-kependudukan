@@ -14,9 +14,9 @@ class AuthController extends Controller
      */
     public function index()
     {
-        // Jika user sudah login, langsung ke dashboard
+        // Jika user sudah login, langsung ke home
         if (Auth::check()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('home');
         }
 
         return view('pages.auth.login');
@@ -34,7 +34,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('dashboard'))
+            return redirect()->intended(route('home'))
                 ->with('success', 'Login berhasil! Selamat datang, ' . Auth::user()->name);
         }
 
@@ -48,10 +48,7 @@ class AuthController extends Controller
      */
     public function showRegistrationForm()
     {
-        // Kalau sudah login, langsung ke dashboard
-        if (Auth::check()) {
-            return redirect()->route('dashboard');
-        }
+        // Kalau sudah login, langsung ke home
 
         return view('pages.auth.signup');
     }
@@ -75,7 +72,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('dashboard')->with('success', 'Akun berhasil dibuat! Anda sudah login.');
+        return redirect()->route('login')->with('success', 'Akun berhasil dibuat! Anda sudah login.');
     }
 
     /**
