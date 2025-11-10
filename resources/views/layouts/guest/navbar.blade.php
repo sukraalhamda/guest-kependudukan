@@ -63,7 +63,7 @@
                 <a href="{{ route('login') }}" class="btn btn-outline-light rounded-0 py-2 px-lg-4 me-2">
                     Login
                 </a>
-                <a href="{{ route('register') }}" class="btn btn-primary rounded-0 py-2 px-lg-4">
+                <a href="{{ route('signup') }}" class="btn btn-primary rounded-0 py-2 px-lg-4">
                     Sign Up
                 </a>
             </div>
