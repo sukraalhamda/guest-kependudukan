@@ -48,6 +48,11 @@
                         class="dropdown-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
                         User
                     </a>
+
+                    <a href="{{ route('anggota_keluarga.index') }}"
+                        class="dropdown-item {{ request()->routeIs('anggota_keluarga.*') ? 'active' : '' }}">
+                        Anggota Keluarga
+                    </a>
                 </div>
             </div>
 

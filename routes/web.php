@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\KeluargaKKController;
+use App\Http\Controllers\AnggotaKeluargaController;
 
 // CRUD Data Keluarga KK
 Route::resource('keluargakk', KeluargaKKController::class);
@@ -41,3 +42,7 @@ Route::post('/signup', [AuthController::class, 'register'])->name('signup.post')
 
 // Proses Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//anggota keluarga
+Route::resource('anggota_keluarga', AnggotaKeluargaController::class);
+

@@ -9,7 +9,7 @@ class WargaController extends Controller
 {
     public function index()
     {
-        $data = Warga::all();
+        $data = warga::all();
         return view('pages.warga.index', compact('data'));
     }
 
