@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Warga;
+use App\Models\warga;
 use Illuminate\Http\Request;
 
 class WargaController extends Controller
@@ -46,7 +46,7 @@ class WargaController extends Controller
 
     public function edit($id)
     {
-        $warga = Warga::findOrFail($id);
+        $warga = warga::findOrFail($id);
         return view('pages.warga.edit', compact('warga'));
     }
 
@@ -74,7 +74,7 @@ class WargaController extends Controller
 
     public function destroy($id)
     {
-        $warga = Warga::findOrFail($id);
+        $warga = warga::findOrFail($id);
         $warga->delete();
 
         return redirect()->route('warga.index')->with('success', 'Data warga berhasil dihapus!');

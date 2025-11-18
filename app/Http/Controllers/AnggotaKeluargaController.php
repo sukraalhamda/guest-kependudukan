@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AnggotaKeluarga;
 use App\Models\KeluargaKK;
-use App\Models\Warga;
+use App\Models\warga;
 use Illuminate\Http\Request;
 
 class AnggotaKeluargaController extends Controller
@@ -12,7 +12,7 @@ class AnggotaKeluargaController extends Controller
     {
         $search = $request->input('search');
 
-        $anggota = AnggotaKeluarga::with(['KeluargaKK', 'Warga'])
+        $anggota = AnggotaKeluarga::with(['KeluargaKK', 'warga'])
             ->when($search, function ($query) use ($search) {
                 $query->whereHas('warga', function ($q) use ($search) {
                     $q->where('nama', 'LIKE', "%{$search}%");
@@ -26,8 +26,8 @@ class AnggotaKeluargaController extends Controller
     public function create()
     {
         $KeluargaKK = KeluargaKK::all();
-        $Warga      = Warga::all();
-        return view('pages.anggotakeluarga.create', compact('KeluargaKK', 'Warga'));
+        $warga      = warga::all();
+        return view('pages.anggotakeluarga.create', compact('KeluargaKK', 'warga'));
     }
 
     public function store(Request $request)
