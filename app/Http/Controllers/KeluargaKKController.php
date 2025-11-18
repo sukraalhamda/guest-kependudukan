@@ -8,12 +8,18 @@ use Illuminate\Http\Request;
 class KeluargaKKController extends Controller
 {
     /**
-     * Menampilkan semua data keluarga KK
+     * Menampilkan semua data keluarga KK + pagination + search
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = KeluargaKK::all();
-        return view('pages.keluargakk.index', compact('data'));
+        $search = $request->search;
+
+        $data = KeluargaKK::query()
+            ->search($search)
+            ->paginate(6)
+            ->withQueryString();
+
+        return view('pages.keluargakk.index', compact('data', 'search'));
     }
 
     /**

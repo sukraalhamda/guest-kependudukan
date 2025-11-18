@@ -8,10 +8,19 @@ use Illuminate\Http\Request;
 
 class AnggotaKeluargaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $anggota = AnggotaKeluarga::with(['KeluargaKK', 'Warga'])->get();
-        return view('pages.anggotakeluarga.index', compact('anggota'));
+        $search = $request->input('search');
+
+        $anggota = AnggotaKeluarga::with(['KeluargaKK', 'Warga'])
+            ->when($search, function ($query) use ($search) {
+                $query->whereHas('warga', function ($q) use ($search) {
+                    $q->where('nama', 'LIKE', "%{$search}%");
+                });
+            })
+            ->paginate(6);
+
+        return view('pages.anggotakeluarga.index', compact('anggota', 'search'));
     }
 
     public function create()

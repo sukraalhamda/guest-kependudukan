@@ -30,7 +30,7 @@ class CreateAnggotaKeluargaDummy extends Seeder
             ]);
 
             // Tambahkan anggota keluarga lainnya
-            foreach (range(1, rand(1, 10)) as $i) {
+            foreach (range(1, rand(1, 100)) as $i) {
                 $anggota = $faker->randomElement($wargaIds);
                 if ($anggota != $kepala) {
                     DB::table('anggota_keluarga')->insert([

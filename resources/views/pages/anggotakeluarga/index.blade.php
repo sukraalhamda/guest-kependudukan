@@ -1,12 +1,23 @@
 @extends('layouts.guest.app')
 
 @section('content')
-    <!-- Tombol Tambah Anggota -->
-    <div class="d-flex justify-content-end mb-3">
-        <a href="{{ route('anggota_keluarga.create') }}" class="btn btn-primary btn-modern">
-            <i class="fa fa-plus me-2"></i>Tambah Anggota Keluarga
-        </a>
-    </div>
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary rounded p-4">
+
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h4 class="text-white">Data Anggota Keluarga</h4>
+
+                <a href="{{ route('anggota_keluarga.create') }}" class="btn btn-primary">
+                    <i class="fa fa-plus me-2"></i>Tambah Data
+                </a>
+            </div>
+
+            <!-- 🔍 FORM SEARCH (kecil + ada tombol) -->
+            <form action="" method="GET" class="d-flex mb-3" style="max-width: 300px;">
+                <input type="text" name="search" class="form-control me-2" placeholder="Cari Nama Anggota Keluarga..."
+                    value="{{ request('search') }}" style="height: 38px;">
+                <button class="btn btn-primary" style="height: 38px;">Cari</button>
+            </form>
 
     <div class="row g-4">
         @forelse($anggota as $a)
@@ -35,7 +46,6 @@
                                 onsubmit="return confirm('Yakin ingin menghapus anggota ini?')" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-
                                 <button type="submit" class="btn btn-danger kk-btn">
                                     <i class="fa fa-trash"></i>
                                 </button>
@@ -50,5 +60,10 @@
                 Belum ada data anggota keluarga.
             </div>
         @endforelse
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-4 d-flex justify-content-center">
+        {{ $anggota->appends(['search' => $search])->links('pagination::bootstrap-5') }}
     </div>
 @endsection

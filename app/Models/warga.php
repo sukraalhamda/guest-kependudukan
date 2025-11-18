@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Warga extends Model
 {
-    protected $table = 'warga';
+    protected $table      = 'warga';
     protected $primaryKey = 'warga_id';
 
     protected $fillable = [
@@ -20,7 +20,7 @@ class Warga extends Model
         'pendidikan',
         'pekerjaan',
         'status_perkawinan',
-        'status_dalam_keluarga'
+        'status_dalam_keluarga',
     ];
 
     public function keluargaKK(): HasOne

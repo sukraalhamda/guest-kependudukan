@@ -16,7 +16,7 @@ class CreateKeluargaKKDummy extends Seeder
         // Ambil semua warga_id yang sudah ada dari tabel warga
         $wargaIds = DB::table('warga')->pluck('warga_id')->toArray();
 
-        foreach (range(1, 10) as $index) {
+        foreach (range(1, 100) as $index) {
             $kepalaKeluarga = $faker->randomElement($wargaIds);
 
             DB::table('keluarga_kk')->insert([

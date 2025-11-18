@@ -1,16 +1,22 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Warga;
+use Illuminate\Http\Request;
 
 class WargaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data = warga::all();
-        return view('pages.warga.index', compact('data'));
+        $search = $request->input('search');
+
+        $data = Warga::when($search, function ($query) use ($search) {
+            return $query->where('nama', 'like', '%' . $search . '%');
+        })
+            ->orderBy('nama', 'asc')
+            ->paginate(6);
+
+        return view('pages.warga.index', compact('data', 'search'));
     }
 
     public function create()
@@ -21,15 +27,15 @@ class WargaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nik' => 'required|unique:warga,nik',
-            'nama' => 'required|string|max:255',
-            'jenis_kelamin' => 'required|in:L,P',
-            'tempat_lahir' => 'required|string',
-            'tanggal_lahir' => 'required|date',
-            'agama' => 'required|string',
-            'pendidikan' => 'required|string',
-            'pekerjaan' => 'required|string',
-            'status_perkawinan' => 'required',
+            'nik'                   => 'required|unique:warga,nik',
+            'nama'                  => 'required|string|max:255',
+            'jenis_kelamin'         => 'required|in:L,P',
+            'tempat_lahir'          => 'required|string',
+            'tanggal_lahir'         => 'required|date',
+            'agama'                 => 'required|string',
+            'pendidikan'            => 'required|string',
+            'pekerjaan'             => 'required|string',
+            'status_perkawinan'     => 'required',
             'status_dalam_keluarga' => 'required|string',
         ]);
 
@@ -49,15 +55,15 @@ class WargaController extends Controller
         $warga = Warga::findOrFail($id);
 
         $request->validate([
-            'nik' => 'required|unique:warga,nik,' . $id . ',warga_id',
-            'nama' => 'required|string|max:255',
-            'jenis_kelamin' => 'required|in:L,P',
-            'tempat_lahir' => 'required|string',
-            'tanggal_lahir' => 'required|date',
-            'agama' => 'required|string',
-            'pendidikan' => 'required|string',
-            'pekerjaan' => 'required|string',
-            'status_perkawinan' => 'required',
+            'nik'                   => 'required|unique:warga,nik,' . $id . ',warga_id',
+            'nama'                  => 'required|string|max:255',
+            'jenis_kelamin'         => 'required|in:L,P',
+            'tempat_lahir'          => 'required|string',
+            'tanggal_lahir'         => 'required|date',
+            'agama'                 => 'required|string',
+            'pendidikan'            => 'required|string',
+            'pekerjaan'             => 'required|string',
+            'status_perkawinan'     => 'required',
             'status_dalam_keluarga' => 'required|string',
         ]);
 
