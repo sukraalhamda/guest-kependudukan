@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\KeluargaKK;
@@ -13,13 +12,15 @@ class KeluargaKKController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
+        $kepala = $request->kepala_keluarga; // ⬅️ FILTER BARU
 
         $data = KeluargaKK::query()
             ->search($search)
+            ->filterKepala($kepala) // ⬅️ FILTER BARU
             ->paginate(6)
             ->withQueryString();
 
-        return view('pages.keluargakk.index', compact('data', 'search'));
+        return view('pages.keluargakk.index', compact('data', 'search', 'kepala'));
     }
 
     /**
@@ -36,11 +37,11 @@ class KeluargaKKController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'kk_nomor' => 'required|unique:keluarga_kk,kk_nomor',
+            'kk_nomor'                 => 'required|unique:keluarga_kk,kk_nomor',
             'kepala_keluarga_warga_id' => 'required|numeric',
-            'alamat' => 'required|string|max:255',
-            'rt' => 'required|string|max:5',
-            'rw' => 'required|string|max:5',
+            'alamat'                   => 'required|string|max:255',
+            'rt'                       => 'required|string|max:5',
+            'rw'                       => 'required|string|max:5',
         ]);
 
         KeluargaKK::create($validated);
@@ -66,11 +67,11 @@ class KeluargaKKController extends Controller
         $keluarga = KeluargaKK::findOrFail($id);
 
         $validated = $request->validate([
-            'kk_nomor' => 'required|unique:keluarga_kk,kk_nomor,' . $id . ',kk_id',
+            'kk_nomor'                 => 'required|unique:keluarga_kk,kk_nomor,' . $id . ',kk_id',
             'kepala_keluarga_warga_id' => 'required|numeric',
-            'alamat' => 'required|string|max:255',
-            'rt' => 'required|string|max:5',
-            'rw' => 'required|string|max:5',
+            'alamat'                   => 'required|string|max:255',
+            'rt'                       => 'required|string|max:5',
+            'rw'                       => 'required|string|max:5',
         ]);
 
         $keluarga->update($validated);

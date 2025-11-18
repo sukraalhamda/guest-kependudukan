@@ -9,14 +9,18 @@ class WargaController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $jenis_kelamin = $request->input('jenis_kelamin');
 
         $data = Warga::when($search, function ($query) use ($search) {
-            return $query->where('nama', 'like', '%' . $search . '%');
-        })
+                return $query->where('nama', 'like', '%' . $search . '%');
+            })
+            ->when($jenis_kelamin, function ($query) use ($jenis_kelamin) {
+                return $query->where('jenis_kelamin', $jenis_kelamin);
+            })
             ->orderBy('nama', 'asc')
             ->paginate(6);
 
-        return view('pages.warga.index', compact('data', 'search'));
+        return view('pages.warga.index', compact('data', 'search', 'jenis_kelamin'));
     }
 
     public function create()

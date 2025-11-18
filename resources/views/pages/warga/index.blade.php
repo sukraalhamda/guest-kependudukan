@@ -11,11 +11,19 @@
                 </a>
             </div>
 
-            <!-- 🔍 FORM SEARCH (kecil + ada tombol) -->
-            <form action="" method="GET" class="d-flex mb-3" style="max-width: 300px;">
+            <!-- 🔍 FORM SEARCH + FILTER JENIS KELAMIN -->
+            <form action="" method="GET" class="d-flex mb-3" style="max-width: 450px;">
+
                 <input type="text" name="search" class="form-control me-2" placeholder="Cari nama warga..."
                     value="{{ request('search') }}" style="height: 38px;">
-                <button class="btn btn-primary" style="height: 38px;">Cari</button>
+
+                <select name="jenis_kelamin" class="form-control me-2" style="height: 38px;">
+                    <option value="">Semua</option>
+                    <option value="L" {{ request('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                    <option value="P" {{ request('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan</option>
+                </select>
+
+                <button class="btn btn-primary" style="height: 38px;">Filter</button>
             </form>
 
             <div class="row g-4">
@@ -77,4 +85,7 @@
             <div class="mt-4 d-flex justify-content-center">
                 {{ $data->withQueryString()->links() }}
             </div>
-        @endsection
+
+        </div>
+    </div>
+@endsection

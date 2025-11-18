@@ -37,4 +37,14 @@ class KeluargaKK extends Model
 
         return $query->where('kk_nomor', 'like', '%' . $search . '%');
     }
+
+    // 🔍 FILTER ID KEPALA KELUARGA
+    public function scopeFilterKepala($query, $kepala)
+    {
+        if (! $kepala) {
+            return $query;
+        }
+
+        return $query->where('kepala_keluarga_warga_id', $kepala);
+    }
 }

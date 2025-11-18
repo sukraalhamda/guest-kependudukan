@@ -10,7 +10,8 @@ class AnggotaKeluargaController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->input('search');
+        $search          = $request->input('search');
+        $filter_hubungan = $request->input('hubungan'); // 🔥 Tambahan filter hubungan
 
         $anggota = AnggotaKeluarga::with(['KeluargaKK', 'warga'])
             ->when($search, function ($query) use ($search) {
@@ -18,9 +19,12 @@ class AnggotaKeluargaController extends Controller
                     $q->where('nama', 'LIKE', "%{$search}%");
                 });
             })
+            ->when($filter_hubungan, function ($query) use ($filter_hubungan) { // 🔥 Tambahan
+                $query->where('hubungan', $filter_hubungan);
+            })
             ->paginate(6);
 
-        return view('pages.anggotakeluarga.index', compact('anggota', 'search'));
+        return view('pages.anggotakeluarga.index', compact('anggota', 'search', 'filter_hubungan'));
     }
 
     public function create()
