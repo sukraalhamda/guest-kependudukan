@@ -22,7 +22,7 @@
                 <select name="kepala_keluarga" class="form-control me-2" style="height: 38px;">
                     <option value="">Kepala Keluarga</option>
 
-                    @foreach (\App\Models\Warga::all() as $w)
+                    @foreach (\App\Models\warga::all() as $w)
                         <option value="{{ $w->warga_id }}"
                             {{ request('kepala_keluarga') == $w->warga_id ? 'selected' : '' }}>
                             {{ $w->nama }}
