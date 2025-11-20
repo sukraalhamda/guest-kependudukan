@@ -16,7 +16,7 @@ Route::resource('warga', WargaController::class);
 // Halaman user
 Route::resource('user', UserController::class);
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('pages.index');
 })->name('home');
 
