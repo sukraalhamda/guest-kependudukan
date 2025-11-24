@@ -13,7 +13,7 @@
                 <label for="kk_id" class="form-label">Nomor KK</label>
                 <select name="kk_id" id="kk_id" class="form-select" required>
                     <option value="">-- Pilih Nomor KK --</option>
-                    @foreach ($KeluargaKK as $kk)
+                    @foreach ($keluargaKK as $kk)
                         <option value="{{ $kk->kk_id }}" {{ $kk->kk_id == $anggota->kk_id ? 'selected' : '' }}>
                             {{ $kk->kk_nomor }} - {{ $kk->kepalaKeluarga?->nama ?? 'Tidak diketahui' }}
                         </option>
