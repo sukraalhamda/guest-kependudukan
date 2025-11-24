@@ -49,9 +49,10 @@ class AnggotaKeluargaController extends Controller
     public function edit($id)
     {
         $anggota    = AnggotaKeluarga::findOrFail($id);
-        $KeluargaKK = KeluargaKK::all();
-        $Warga      = Warga::all();
-        return view('pages.anggotakeluarga.edit', compact('anggota', 'KeluargaKK', 'Warga'));
+        $keluargaKK = KeluargaKK::all();
+        $warga      = Warga::all();
+
+        return view('pages.anggotakeluarga.edit', compact('anggota', 'keluargaKK', 'warga'));
     }
 
     public function update(Request $request, $id)

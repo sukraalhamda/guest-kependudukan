@@ -37,8 +37,8 @@
             {{-- Input Hubungan --}}
             <div class="mb-3">
                 <label for="hubungan" class="form-label">Hubungan</label>
-                <input type="text" name="hubungan" id="hubungan" class="form-control" value="{{ $anggota->hubungan }}"
-                    required>
+                <input type="text" name="hubungan" id="hubungan" class="form-control"
+                    value="{{ $anggota->hubungan }}" required>
             </div>
 
             {{-- Tombol Aksi --}}
