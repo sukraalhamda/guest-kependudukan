@@ -23,7 +23,7 @@
                 <label for="warga_id" class="form-label">Nama Warga</label>
                 <select name="warga_id" id="warga_id" class="form-select" required>
                     <option value="">-- Pilih Warga --</option>
-                    @foreach ($Warga as $w)
+                    @foreach ($warga as $w)
                         <option value="{{ $w->warga_id }}">{{ $w->nama }}</option>
                     @endforeach
                 </select>
@@ -40,4 +40,3 @@
     </div>
 @endsection
 
-     

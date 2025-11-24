@@ -26,7 +26,7 @@
                 <label for="warga_id" class="form-label">Nama Warga</label>
                 <select name="warga_id" id="warga_id" class="form-select" required>
                     <option value="">-- Pilih Nama Warga --</option>
-                    @foreach ($Warga as $w)
+                    @foreach ($warga as $w)
                         <option value="{{ $w->warga_id }}" {{ $w->warga_id == $anggota->warga_id ? 'selected' : '' }}>
                             {{ $w->nama }}
                         </option>
