@@ -29,9 +29,9 @@ class AnggotaKeluargaController extends Controller
 
     public function create()
     {
-        $KeluargaKK = KeluargaKK::all();
+        $keluargaKK = KeluargaKK::all();
         $warga      = warga::all();
-        return view('pages.anggotakeluarga.create', compact('KeluargaKK', 'warga'));
+        return view('pages.anggotakeluarga.create', compact('keluargaKK', 'warga'));
     }
 
     public function store(Request $request)
