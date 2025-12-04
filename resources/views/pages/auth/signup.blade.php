@@ -230,7 +230,7 @@
                 <input type="password" name="password_confirmation" class="form-control" id="signup-confirm"
                     placeholder="Ulangi password" required>
             </div>
-
+            <input type="hidden" name="role" value="user">
             <button type="submit" class="btn btn-primary w-100">Sign Up</button>
         </form>
 

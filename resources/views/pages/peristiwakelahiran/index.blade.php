@@ -33,7 +33,7 @@
                                     <div class="small mt-1">
                                         @foreach ($item->media as $media)
                                             <a href="{{ asset('storage/' . $media->file_name) }}" target="_blank"
-                                                class="text-info me-2">📎</a>
+                                                class="text-info me-2">DOKUMEN</a>
                                         @endforeach
                                     </div>
                                 @endif

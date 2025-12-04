@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -10,57 +9,62 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     /**
-     * Halaman Sign In
+     * Halaman Login
      */
     public function index()
     {
-        // Jika user sudah login, langsung ke home
         if (Auth::check()) {
-            return redirect()->route('home');
+            return $this->redirectByRole();
         }
 
         return view('pages.auth.login');
     }
 
     /**
-     * Proses Sign In
+     * Proses Login
      */
     public function login(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'email'    => 'required|email',
             'password' => 'required|string|min:6',
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended(route('home'))
-                ->with('success', 'Login berhasil! Selamat datang, ' . Auth::user()->name);
+        $user = User::where('email', $request->email)->first();
+
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+            return back()
+                ->withErrors(['email' => 'Email atau password salah'])
+                ->withInput();
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ])->withInput();
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        return $this->redirectByRole()
+            ->with('success', 'Login berhasil! Selamat datang, ' . $user->name);
     }
 
     /**
-     * Halaman Sign Up
+     * Halaman Register
      */
     public function showRegistrationForm()
     {
-        // Kalau sudah login, langsung ke home
+        if (Auth::check()) {
+            return $this->redirectByRole();
+        }
 
         return view('pages.auth.signup');
     }
 
     /**
-     * Proses Sign Up
+     * Proses Register
      */
     public function register(Request $request)
     {
         $validated = $request->validate([
             'name'     => 'required|string|max:255',
-            'email'    => 'required|string|email|max:255|unique:users,email',
+            'email'    => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -68,11 +72,14 @@ class AuthController extends Controller
             'name'     => $validated['name'],
             'email'    => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'role'     => 'user', // default role
         ]);
 
         Auth::login($user);
+        $request->session()->regenerate();
 
-        return redirect()->route('login')->with('success', 'Akun berhasil dibuat! Anda sudah login.');
+        return $this->redirectByRole()
+            ->with('success', 'Akun berhasil dibuat!');
     }
 
     /**
@@ -81,9 +88,21 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login')->with('success', 'Anda telah logout.');
+        return redirect()->route('login')
+            ->with('success', 'Anda telah logout.');
+    }
+
+    /**
+     * Redirect berdasarkan role
+     */
+    private function redirectByRole()
+    {
+        return Auth::user()->role === 'admin'
+            ? redirect()->route('admin.dashboard')
+            : redirect()->route('user.dashboard');
     }
 }

@@ -45,6 +45,19 @@
                             placeholder="Ulangi password baru">
                     </div>
                 </div>
+
+                <div class="mb-3">
+                    <label>Role</label>
+                    <select name="role" class="form-control" required>
+                        <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                        <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
+                    </select>
+
+                    @error('role')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
                 {{-- FOTO PROFIL LAMA --}}
                 @if ($user->media_photo)
                     <div class="mb-3">
