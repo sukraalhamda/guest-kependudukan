@@ -1,128 +1,112 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Media;
 use App\Models\PeristiwaKelahiran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PeristiwaKelahiranController extends Controller
 {
-    /**
-     * Display listing data kelahiran
-     */
     public function index()
     {
-        $kelahiran = PeristiwaKelahiran::latest()->paginate(10);
-
+        $kelahiran = PeristiwaKelahiran::with('media')->latest()->paginate(10);
         return view('pages.peristiwakelahiran.index', compact('kelahiran'));
     }
 
-    /**
-     * Form tambah data kelahiran
-     */
     public function create()
     {
         return view('pages.peristiwakelahiran.create');
     }
 
-    /**
-     * Simpan data ke database
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'warga_id'       => 'required|numeric',
-            'tgl_lahir'      => 'required|date',
-            'tempat_lahir'   => 'required|string|max:255',
-            'ayah_warga_id'  => 'required|numeric',
-            'ibu_warga_id'   => 'required|numeric',
-            'no_akta'        => 'required|string|unique:peristiwa_kelahiran,no_akta',
-            'file_pendukung' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'warga_id'         => 'required|numeric',
+            'tgl_lahir'        => 'required|date',
+            'tempat_lahir'     => 'required|string|max:255',
+            'ayah_warga_id'    => 'required|numeric',
+            'ibu_warga_id'     => 'required|numeric',
+            'no_akta'          => 'required|string|unique:peristiwa_kelahiran,no_akta',
+            'file_pendukung.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
 
-        $data = $request->all();
+        $data      = $request->only(['warga_id', 'tgl_lahir', 'tempat_lahir', 'ayah_warga_id', 'ibu_warga_id', 'no_akta']);
+        $kelahiran = PeristiwaKelahiran::create($data);
 
-        // Upload File
         if ($request->hasFile('file_pendukung')) {
-            $data['file_pendukung'] = $request->file('file_pendukung')->store(
-                'peristiwa_kelahiran',
-                'public'
-            );
+            foreach ($request->file('file_pendukung') as $index => $file) {
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('peristiwa_kelahiran', $fileName, 'public');
+
+                $kelahiran->media()->create([
+                    'file_name'  => $filePath,
+                    'ref_table'  => 'peristiwa_kelahiran',
+                    'sort_order' => $index + 1,
+                    'mime_type'  => $file->getClientMimeType(),
+                ]);
+            }
         }
 
-        PeristiwaKelahiran::create($data);
-
-        return redirect()
-            ->route('peristiwa_kelahiran.index')
+        return redirect()->route('peristiwa_kelahiran.index')
             ->with('success', 'Data kelahiran berhasil ditambahkan');
     }
 
-    /**
-     * Form edit
-     */
     public function edit($id)
     {
-        $kelahiran = PeristiwaKelahiran::findOrFail($id);
-
+        $kelahiran = PeristiwaKelahiran::with('media')->findOrFail($id);
         return view('pages.peristiwakelahiran.edit', compact('kelahiran'));
     }
 
-    /**
-     * Update data
-     */
     public function update(Request $request, $id)
-{
-    $kelahiran = PeristiwaKelahiran::findOrFail($id);
+    {
+        $kelahiran = PeristiwaKelahiran::with('media')->findOrFail($id);
 
-    $request->validate([
-        'warga_id' => 'required|numeric',
-        'tgl_lahir' => 'required|date',
-        'tempat_lahir' => 'required|string|max:255',
-        'ayah_warga_id' => 'required|numeric',
-        'ibu_warga_id' => 'required|numeric',
-        'no_akta' => 'required|string|unique:peristiwa_kelahiran,no_akta,' . $id . ',kelahiran_id',
-        'file_pendukung' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
-    ]);
+        $request->validate([
+            'warga_id'         => 'required|numeric',
+            'tgl_lahir'        => 'required|date',
+            'tempat_lahir'     => 'required|string|max:255',
+            'ayah_warga_id'    => 'required|numeric',
+            'ibu_warga_id'     => 'required|numeric',
+            'no_akta'          => 'required|string|unique:peristiwa_kelahiran,no_akta,' . $id . ',kelahiran_id',
+            'file_pendukung.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+        ]);
 
-    $data = $request->except('file_pendukung');
+        $data = $request->only(['warga_id', 'tgl_lahir', 'tempat_lahir', 'ayah_warga_id', 'ibu_warga_id', 'no_akta']);
+        $kelahiran->update($data);
 
-    if ($request->hasFile('file_pendukung')) {
+        if ($request->hasFile('file_pendukung')) {
+            foreach ($request->file('file_pendukung') as $file) {
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('peristiwa_kelahiran', $fileName, 'public');
 
-        // Hapus file lama
-        if ($kelahiran->file_pendukung && file_exists(storage_path('app/public/peristiwa_kelahiran/'.$kelahiran->file_pendukung))) {
-            unlink(storage_path('app/public/peristiwa_kelahiran/'.$kelahiran->file_pendukung));
+                $kelahiran->media()->create([
+                    'file_name'  => $filePath,
+                    'ref_table'  => 'peristiwa_kelahiran',
+                    'sort_order' => $kelahiran->media()->count() + 1,
+                    'mime_type'  => $file->getClientMimeType(),
+                ]);
+            }
         }
 
-        // Upload baru
-        $name = time().'_'.$request->file('file_pendukung')->getClientOriginalName();
-        $request->file('file_pendukung')->storeAs('public/peristiwa_kelahiran', $name);
-
-        $data['file_pendukung'] = $name;
+        return redirect()->route('peristiwa_kelahiran.index')
+            ->with('success', 'Data kelahiran berhasil diperbarui');
     }
 
-    $kelahiran->update($data);
-
-    return redirect()
-        ->route('peristiwa_kelahiran.index')
-        ->with('success', 'Data kelahiran berhasil diperbarui');
-}
-
-    /**
-     * Hapus data
-     */
     public function destroy($id)
     {
-        $kelahiran = PeristiwaKelahiran::findOrFail($id);
+        $kelahiran = PeristiwaKelahiran::with('media')->findOrFail($id);
 
-        // Hapus file jika ada
-        if ($kelahiran->file_pendukung && Storage::disk('public')->exists($kelahiran->file_pendukung)) {
-            Storage::disk('public')->delete($kelahiran->file_pendukung);
+        foreach ($kelahiran->media as $media) {
+            if (Storage::disk('public')->exists($media->file_name)) {
+                Storage::disk('public')->delete($media->file_name);
+            }
+            $media->delete();
         }
 
         $kelahiran->delete();
 
-        return redirect()
-            ->route('peristiwa_kelahiran.index')
+        return redirect()->route('peristiwa_kelahiran.index')
             ->with('success', 'Data kelahiran berhasil dihapus');
     }
 }

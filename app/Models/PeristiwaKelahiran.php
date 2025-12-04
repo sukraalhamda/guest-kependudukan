@@ -20,4 +20,12 @@ class PeristiwaKelahiran extends Model
         'ibu_warga_id',
         'no_akta',
     ];
+
+    // Relasi media
+    public function media()
+    {
+        return $this->hasMany(Media::class, 'ref_id', 'kelahiran_id')
+                    ->where('ref_table', 'peristiwa_kelahiran')
+                    ->orderBy('sort_order', 'asc'); // optional: urutkan media
+    }
 }
