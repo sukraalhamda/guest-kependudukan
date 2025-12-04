@@ -11,7 +11,6 @@ class PeristiwaKelahiran extends Model
 
     protected $table = 'peristiwa_kelahiran';
     protected $primaryKey = 'kelahiran_id';
-    public $timestamps = false;
 
     protected $fillable = [
         'warga_id',
@@ -21,20 +20,4 @@ class PeristiwaKelahiran extends Model
         'ibu_warga_id',
         'no_akta',
     ];
-
-    // Relasi ke tabel warga
-    public function warga()
-    {
-        return $this->belongsTo(Warga::class, 'warga_id');
-    }
-
-    public function ayah()
-    {
-        return $this->belongsTo(Warga::class, 'ayah_warga_id');
-    }
-
-    public function ibu()
-    {
-        return $this->belongsTo(Warga::class, 'ibu_warga_id');
-    }
 }

@@ -53,7 +53,13 @@
                         class="dropdown-item {{ request()->routeIs('anggota_keluarga.*') ? 'active' : '' }}">
                         Anggota Keluarga
                     </a>
+
+                    <a href="{{ route('peristiwa_kelahiran.index') }}"
+                        class="dropdown-item {{ request()->routeIs('peristiwa_kelahiran.*') ? 'active' : '' }}">
+                        Peristiwa Kelahiran
+                    </a>
                 </div>
+
             </div>
 
             <a href="{{ route('contact') }}"
@@ -74,8 +80,8 @@
             </div>
         @else
             <div class="dropdown ms-lg-3">
-                <button class="btn btn-primary rounded-0 py-2 px-lg-4 dropdown-toggle fas fa-user" type="button" id="userDropdown"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-primary rounded-0 py-2 px-lg-4 dropdown-toggle fas fa-user" type="button"
+                    id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ Auth::user()->name }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0"

@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\KeluargaKKController;
 use App\Http\Controllers\AnggotaKeluargaController;
+use App\Http\Controllers\PeristiwaKelahiranController;
 
 // CRUD Data Keluarga KK
 Route::resource('keluargakk', KeluargaKKController::class);
@@ -45,4 +46,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //anggota keluarga
 Route::resource('anggota_keluarga', AnggotaKeluargaController::class);
+
+//peristiwa kelahiran
+Route::resource('peristiwa_kelahiran', PeristiwaKelahiranController::class);
 

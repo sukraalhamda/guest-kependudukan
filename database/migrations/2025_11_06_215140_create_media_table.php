@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateMediaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('media', function (Blueprint $table) {
-            $table->id();
-            $table->morphs('mediable');
-            $table->string('file_path');
-            $table->string('file_name');
-            $table->string('file_type');
-            $table->integer('file_size');
+            $table->bigIncrements('media_id');         // Primary Key
+            $table->string('ref_table');               // Nama tabel referensi
+            $table->unsignedBigInteger('ref_id');      // ID referensi
+            $table->string('file_name');               // Lokasi file
+            $table->string('caption')->nullable();     // Caption optional
+            $table->string('mime_type')->nullable();   // Mime type optional
+            $table->integer('sort_order')->default(0); // Urutan
             $table->timestamps();
+
+            // Index untuk mempercepat query berdasarkan ref_table dan ref_id
+            $table->index(['ref_table', 'ref_id']);
         });
     }
 
@@ -29,4 +33,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('media');
     }
-};
+}

@@ -28,7 +28,8 @@ class KeluargaKKController extends Controller
      */
     public function create()
     {
-        return view('pages.keluargakk.create');
+        $keluargaKK = KeluargaKK::all();
+        return view('pages.keluargakk.create', compact('keluargaKK'));
     }
 
     /**

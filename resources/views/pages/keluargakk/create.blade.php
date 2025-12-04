@@ -14,7 +14,7 @@
                     <input
                         type="text"
                         name="kk_nomor"
-                        class="form-control bg-dark text-white border-0 rounded-3 p-2"
+                        class="form-control bg-white text-black border-0 rounded-3 p-2"
                         value="{{ old('kk_nomor') }}"
                         placeholder="Masukkan nomor KK"
                         required>
@@ -25,7 +25,7 @@
                     <input
                         type="number"
                         name="kepala_keluarga_warga_id"
-                        class="form-control bg-dark text-white border-0 rounded-3 p-2"
+                        class="form-control bg-white text-black border-0 rounded-3 p-2"
                         value="{{ old('kepala_keluarga_warga_id') }}"
                         placeholder="Masukkan ID kepala keluarga"
                         required>
@@ -38,7 +38,7 @@
                     <input
                         type="text"
                         name="alamat"
-                        class="form-control bg-dark text-white border-0 rounded-3 p-2"
+                        class="form-control bg-white text-black border-0 rounded-3 p-2"
                         value="{{ old('alamat') }}"
                         placeholder="Masukkan alamat"
                         required>
@@ -49,7 +49,7 @@
                     <input
                         type="text"
                         name="rt"
-                        class="form-control bg-dark text-white border-0 rounded-3 p-2"
+                        class="form-control bg-white text-black border-0 rounded-3 p-2"
                         value="{{ old('rt') }}"
                         placeholder="RT"
                         maxlength="5"
@@ -61,7 +61,7 @@
                     <input
                         type="text"
                         name="rw"
-                        class="form-control bg-dark text-white border-0 rounded-3 p-2"
+                        class="form-control bg-white text-black border-0 rounded-3 p-2"
                         value="{{ old('rw') }}"
                         placeholder="RW"
                         maxlength="5"
@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-success px-4">Simpan</button>
+            <button type="submit" class="btn btn-primary px-4">Simpan</button>
             <a href="{{ route('keluargakk.index') }}" class="btn btn-outline-light px-4">Kembali</a>
 
         </form>
