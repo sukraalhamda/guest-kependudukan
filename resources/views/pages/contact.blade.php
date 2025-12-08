@@ -24,7 +24,6 @@
                 <!-- Form Kontak -->
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                     <div class="bg-secondary p-5">
-<<<<<<< HEAD
 
                         <p class="d-inline-block bg-dark text-primary py-1 px-4">
                             Kontak Kami
@@ -41,10 +40,6 @@
                             sesuai jam kerja.
                         </p>
 
-=======
-                        <p class="d-inline-block bg-dark text-primary py-1 px-4">Hubungi Kami</p>
-                        <h1 class="text-uppercase mb-4">Kamu Ada Pertanyaan ? Hubungi Kami</h1>
->>>>>>> b5345530eeefc3897466bb045fc9ac9073d51799
                         <form>
                             <div class="row g-3">
 
