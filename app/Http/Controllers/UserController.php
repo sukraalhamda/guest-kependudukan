@@ -1,16 +1,38 @@
 <?php
 namespace App\Http\Controllers;
 
-use DB;
-use Storage;
-use App\Models\User;
 use App\Models\Media;
+use App\Models\User;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Storage;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        // ✅ USER boleh akses INDEX saja (lihat data)
+        // ✅ ADMIN boleh semua
+        $this->middleware(function ($request, $next) {
+
+            if (Auth::user()->role === 'user') {
+                $allowed = ['index'];
+
+                if (! in_array($request->route()->getActionMethod(), $allowed)) {
+                    abort(403, 'Anda tidak memiliki akses.');
+                }
+            }
+
+            return $next($request);
+        });
+    }
+
+    /**
+     * LIST USER (ADMIN & USER)
+     */
     public function index(Request $request)
     {
         $filterable = ['role'];
@@ -24,11 +46,17 @@ class UserController extends Controller
         return view('pages.user.index', compact('user'));
     }
 
+    /**
+     * CREATE (ADMIN ONLY)
+     */
     public function create()
     {
         return view('pages.user.create');
     }
 
+    /**
+     * STORE (ADMIN ONLY)
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -47,25 +75,30 @@ class UserController extends Controller
         ]);
 
         if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $path = $file->store('users', 'public');
+            $path = $request->file('photo')->store('users', 'public');
 
             Media::create([
                 'ref_table' => 'users',
                 'ref_id'    => $user->id,
                 'file_name' => $path,
-                'mime_type' => $file->getClientMimeType(),
+                'mime_type' => $request->file('photo')->getClientMimeType(),
             ]);
         }
 
         return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan');
     }
 
+    /**
+     * EDIT (ADMIN ONLY)
+     */
     public function edit(User $user)
     {
         return view('pages.user.edit', compact('user'));
     }
 
+    /**
+     * UPDATE (ADMIN ONLY)
+     */
     public function update(Request $request, User $user)
     {
         $request->validate([
@@ -86,13 +119,13 @@ class UserController extends Controller
 
         if ($request->hasFile('photo')) {
 
-            $old = \DB::table('media')
+            $old = DB::table('media')
                 ->where('ref_table', 'users')
                 ->where('ref_id', $user->id)
                 ->first();
 
             if ($old && Storage::disk('public')->exists($old->file_name)) {
-                \Storage::disk('public')->delete($old->file_name);
+                Storage::disk('public')->delete($old->file_name);
             }
 
             DB::table('media')
@@ -112,6 +145,9 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'User berhasil diperbarui');
     }
 
+    /**
+     * DELETE (ADMIN ONLY)
+     */
     public function destroy(User $user)
     {
         $user->delete();

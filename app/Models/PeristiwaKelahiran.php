@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +8,7 @@ class PeristiwaKelahiran extends Model
 {
     use HasFactory;
 
-    protected $table = 'peristiwa_kelahiran';
+    protected $table      = 'peristiwa_kelahiran';
     protected $primaryKey = 'kelahiran_id';
 
     protected $fillable = [
@@ -21,11 +20,10 @@ class PeristiwaKelahiran extends Model
         'no_akta',
     ];
 
-    // Relasi media
     public function media()
     {
         return $this->hasMany(Media::class, 'ref_id', 'kelahiran_id')
-                    ->where('ref_table', 'peristiwa_kelahiran')
-                    ->orderBy('sort_order', 'asc'); // optional: urutkan media
+            ->where('ref_table', 'peristiwa_kelahiran')
+            ->orderBy('sort_order', 'asc');
     }
 }

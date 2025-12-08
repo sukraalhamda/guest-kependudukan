@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Media;
@@ -36,6 +37,7 @@ class PeristiwaKelahiranController extends Controller
 
         if ($request->hasFile('file_pendukung')) {
             foreach ($request->file('file_pendukung') as $index => $file) {
+
                 $fileName = time() . '_' . $file->getClientOriginalName();
                 $filePath = $file->storeAs('peristiwa_kelahiran', $fileName, 'public');
 
@@ -75,8 +77,30 @@ class PeristiwaKelahiranController extends Controller
         $data = $request->only(['warga_id', 'tgl_lahir', 'tempat_lahir', 'ayah_warga_id', 'ibu_warga_id', 'no_akta']);
         $kelahiran->update($data);
 
+        /* ================================
+         * HAPUS FILE LAMA
+         * ================================ */
+        if ($request->hapus_media) {
+            foreach ($request->hapus_media as $mediaId) {
+
+                $media = Media::where('media_id', $mediaId)
+                    ->where('ref_table', 'peristiwa_kelahiran')
+                    ->where('ref_id', $kelahiran->kelahiran_id)
+                    ->first();
+
+                if ($media) {
+                    Storage::disk('public')->delete($media->file_name);
+                    $media->delete();
+                }
+            }
+        }
+
+        /* ================================
+         * UPLOAD FILE BARU
+         * ================================ */
         if ($request->hasFile('file_pendukung')) {
             foreach ($request->file('file_pendukung') as $file) {
+
                 $fileName = time() . '_' . $file->getClientOriginalName();
                 $filePath = $file->storeAs('peristiwa_kelahiran', $fileName, 'public');
 
@@ -98,9 +122,7 @@ class PeristiwaKelahiranController extends Controller
         $kelahiran = PeristiwaKelahiran::with('media')->findOrFail($id);
 
         foreach ($kelahiran->media as $media) {
-            if (Storage::disk('public')->exists($media->file_name)) {
-                Storage::disk('public')->delete($media->file_name);
-            }
+            Storage::disk('public')->delete($media->file_name);
             $media->delete();
         }
 

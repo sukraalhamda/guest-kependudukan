@@ -14,7 +14,7 @@
         </div>
     </div>
     <!-- Page Header End -->
-    
+
     <!-- About Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -26,16 +26,21 @@
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <p class="d-inline-block bg-secondary text-primary py-1 px-4">About us</p>
+                    <p class="d-inline-block bg-secondary text-primary py-1 px-4">TENTANG</p>
                     <h1 class="text-uppercase mb-4">KEPENDUDUKAN</h1>
-                    <p>Sistem Kependudukan adalah sistem yang digunakan untuk mencatat, mengelola, dan memvalidasi data
-                        dasar penduduk dalam suatu wilayah. Data utama yang dikelola meliputi Kartu Keluarga (KK), anggota
-                        keluarga, serta peristiwa vital seperti kelahiran, kematian, dan perpindahan penduduk.
-
+                    <p>Sistem Kependudukan adalah platform layanan yang dirancang untuk mencatat, mengelola, dan memvalidasi
+                        data dasar penduduk dalam suatu wilayah secara terstruktur dan terintegrasi. Data utama yang
+                        dikelola meliputi Kartu Keluarga (KK), data individu dan anggota keluarga, serta peristiwa
+                        kependudukan seperti kelahiran, kematian, dan perpindahan penduduk.
                         Tujuan sistem ini adalah menyediakan data yang akurat, terintegrasi, dan mudah diakses untuk
                         mendukung pelayanan publik serta administrasi kependudukan.</p>
-                    <p class="mb-4">Dengan sistem ini, diharapkan proses administrasi kependudukan menjadi lebih efisien,
-                        transparan, dan responsif terhadap kebutuhan masyarakat serta pemerintah daerah.</p>
+
+                    <p class="mb-4">Sistem ini bertujuan untuk menyediakan data kependudukan yang akurat, aman, dan mudah
+                        diakses guna mendukung pelayanan publik dan proses administrasi kependudukan di tingkat pemerintah
+                        daerah.</p>
+                    <p>Dengan adanya Sistem Kependudukan, diharapkan pengelolaan data penduduk dapat berjalan lebih efisien,
+                        transparan, dan responsif, sehingga mampu meningkatkan kualitas layanan kepada masyarakat serta
+                        membantu pengambilan keputusan berbasis data.</p>
                 </div>
             </div>
         </div>
@@ -46,76 +51,44 @@
     <!-- Team Start -->
     <div class="container-xxl py-5">
         <div class="container">
+
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <p class="d-inline-block bg-secondary text-primary py-1 px-4">Our Barber</p>
-                <h1 class="text-uppercase">Meet Our Barber</h1>
+                <p class="d-inline-block bg-secondary text-primary py-1 px-4">Profil</p>
+                <h1 class="text-uppercase">Penanggung Jawab Layanan</h1>
             </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
                     <div class="team-item">
+
                         <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('asset/img/team-1.jpg') }}" alt="">
+                            <img class="img-fluid" src="{{ asset('asset/img/sukra.jpg') }}" alt="Petugas Pelayanan">
+
+                            <!-- SOCIAL MEDIA (TETAP ADA) -->
                             <div class="team-social">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square" href="#">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="btn btn-square" href="#">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a class="btn btn-square" href="#">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
                             </div>
                         </div>
+
                         <div class="bg-secondary text-center p-4">
-                            <h5 class="text-uppercase">Barber Name</h5>
-                            <span class="text-primary">Designation</span>
+                            <h5 class="text-uppercase mb-1">Nama Pejabat</h5>
+                            <span class="text-primary">
+                                Penanggung Jawab Administrasi Kependudukan
+                            </span>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="team-item">
-                        <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('asset/img/team-2.jpg') }}" alt="">
-                            <div class="team-social">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                        <div class="bg-secondary text-center p-4">
-                            <h5 class="text-uppercase">Barber Name</h5>
-                            <span class="text-primary">Designation</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="team-item">
-                        <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('asset/img/team-3.jpg') }}" alt="">
-                            <div class="team-social">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                        <div class="bg-secondary text-center p-4">
-                            <h5 class="text-uppercase">Barber Name</h5>
-                            <span class="text-primary">Designation</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="team-item">
-                        <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('asset/img/team-4.jpg') }}" alt="">
-                            <div class="team-social">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                        <div class="bg-secondary text-center p-4">
-                            <h5 class="text-uppercase">Barber Name</h5>
-                            <span class="text-primary">Designation</span>
-                        </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <!-- Team End -->

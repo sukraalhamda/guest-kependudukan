@@ -52,23 +52,37 @@
                         value="{{ old('no_akta', $kelahiran->no_akta) }}" required>
                 </div>
 
+                {{-- MEDIA LAMA + CHECKBOX HAPUS --}}
                 @if ($kelahiran->media->count())
                     <div class="mb-3">
                         <label class="form-label text-white fw-bold mb-2">File Pendukung Saat Ini:</label>
-                        <div class="d-flex flex-wrap gap-2">
+
+                        <div class="d-flex flex-column gap-2">
                             @foreach ($kelahiran->media as $media)
-                                @if (preg_match('/\.(jpg|jpeg|png)$/i', $media->file_name))
-                                    <img src="{{ asset('storage/' . $media->file_name) }}" alt="media" class="rounded"
-                                        style="max-height:100px;">
-                                @else
-                                    <a href="{{ asset('storage/' . $media->file_name) }}" target="_blank"
-                                        class="btn btn-outline-info btn-sm">📎 Lihat File</a>
-                                @endif
+                                <div class="d-flex align-items-center bg-dark p-2 rounded">
+
+                                    {{-- Preview gambar atau tombol lihat --}}
+                                    @if (preg_match('/\.(jpg|jpeg|png)$/i', $media->file_name))
+                                        <img src="{{ asset('storage/' . $media->file_name) }}" class="rounded me-3"
+                                            style="max-height:80px;">
+                                    @else
+                                        <a href="{{ asset('storage/' . $media->file_name) }}" target="_blank"
+                                            class="btn btn-outline-info btn-sm me-3">📎 Lihat File</a>
+                                    @endif
+
+                                    {{-- Checkbox hapus --}}
+                                    <label class="text-white">
+                                        <input type="checkbox" name="hapus_media[]" value="{{ $media->media_id }}">
+                                        Hapus file ini
+                                    </label>
+
+                                </div>
                             @endforeach
                         </div>
                     </div>
                 @endif
 
+                {{-- Upload baru --}}
                 <div class="mb-3">
                     <label class="form-label text-white">Tambah File Pendukung Baru (Opsional)</label>
                     <input type="file" name="file_pendukung[]"

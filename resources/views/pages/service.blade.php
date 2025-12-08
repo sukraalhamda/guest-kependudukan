@@ -14,138 +14,135 @@
         </div>
     </div>
     <!-- Page Header End -->
+
     <!-- Service Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <p class="d-inline-block bg-secondary text-primary py-1 px-4">Services</p>
-                <h1 class="text-uppercase">What We Provide</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-                        <div class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-                            style="width: 60px; height: 60px;">
-                            <img class="{{ asset('asset/img-fluid') }}" src="{{ asset('asset/img/haircut.png') }}"
-                                alt="">
-                        </div>
-                        <div class="ps-4">
-                            <h3 class="text-uppercase mb-3">Haircut</h3>
-                            <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam.</p>
-                            <span class="text-uppercase text-primary">From $15</span>
-                        </div>
-                        <a class="btn btn-square" href=""><i class="fa fa-plus text-primary"></i></a>
-                    </div>
+    <!-- Button Trigger -->
+    <div class="text-center my-5">
+        <button class="btn btn-primary btn-lg px-4 py-3" data-bs-toggle="modal" data-bs-target="#jamPelayananModal">
+
+            <i class="fa-solid fa-clock me-2"></i>
+            Klik untuk Melihat Jam Pelayanan
+        </button>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="jamPelayananModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-secondary text-white">
+
+                <!-- Modal Header -->
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-uppercase">
+                        <i class="fa-solid fa-id-card"></i> Jam Pelayanan
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-                        <div class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-                            style="width: 60px; height: 60px;">
-                            <img class="{{ asset('asset/img-fluid') }}" src="{{ asset('asset/img/beard-trim.png') }}"
-                                alt="">
-                        </div>
-                        <div class="ps-4">
-                            <h3 class="text-uppercase mb-3">Beard Trim</h3>
-                            <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam.</p>
-                            <span class="text-uppercase text-primary">From $15</span>
-                        </div>
-                        <a class="btn btn-square" href=""><i class="fa fa-plus text-primary"></i></a>
+
+                <!-- Modal Body -->
+                <div class="modal-body px-5 pb-5">
+
+                    <p class="d-inline-flex bg-dark text-primary py-1 px-4 mb-3">
+                        Pelayanan Administrasi Kependudukan
+                    </p>
+
+                    <h4 class="text-uppercase mb-4">
+                        Jadwal Pelayanan
+                    </h4>
+
+                    <div class="d-flex justify-content-between border-bottom py-2">
+                        <h6 class="mb-0">Senin</h6>
+                        <span>08.00 - 15.00 WIB</span>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-                        <div class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-                            style="width: 60px; height: 60px;">
-                            <img class="img-fluid" src="{{ asset('asset/img/mans-shave.png') }}" alt="">
-                        </div>
-                        <div class="ps-4">
-                            <h3 class="text-uppercase mb-3">Mans Shave</h3>
-                            <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam.</p>
-                            <span class="text-uppercase text-primary">From $15</span>
-                        </div>
-                        <a class="btn btn-square" href=""><i class="fa fa-plus text-primary"></i></a>
+
+                    <div class="d-flex justify-content-between border-bottom py-2">
+                        <h6 class="mb-0">Selasa</h6>
+                        <span>08.00 - 15.00 WIB</span>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-                        <div class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-                            style="width: 60px; height: 60px;">
-                            <img class="img-fluid" src="{{ asset('asset/img/hair-dyeing.png') }}" alt="">
-                        </div>
-                        <div class="ps-4">
-                            <h3 class="text-uppercase mb-3">Hair Dyeing</h3>
-                            <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam.</p>
-                            <span class="text-uppercase text-primary">From $15</span>
-                        </div>
-                        <a class="btn btn-square" href=""><i class="fa fa-plus text-primary"></i></a>
+
+                    <div class="d-flex justify-content-between border-bottom py-2">
+                        <h6 class="mb-0">Rabu</h6>
+                        <span>08.00 - 15.00 WIB</span>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-                        <div class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-                            style="width: 60px; height: 60px;">
-                            <img class="img-fluid" src="{{ asset('asset/img/mustache.png') }}" alt="">
-                        </div>
-                        <div class="ps-4">
-                            <h3 class="text-uppercase mb-3">Mustache</h3>
-                            <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam.</p>
-                            <span class="text-uppercase text-primary">From $15</span>
-                        </div>
-                        <a class="btn btn-square" href=""><i class="fa fa-plus text-primary"></i></a>
+
+                    <div class="d-flex justify-content-between border-bottom py-2">
+                        <h6 class="mb-0">Kamis</h6>
+                        <span>08.00 - 15.00 WIB</span>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-                        <div class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-                            style="width: 60px; height: 60px;">
-                            <img class="img-fluid" src="{{ asset('asset/img/stacking.png') }}" alt="">
-                        </div>
-                        <div class="ps-4">
-                            <h3 class="text-uppercase mb-3">Stacking</h3>
-                            <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam.</p>
-                            <span class="text-uppercase text-primary">From $15</span>
-                        </div>
-                        <a class="btn btn-square" href=""><i class="fa fa-plus text-primary"></i></a>
+
+                    <div class="d-flex justify-content-between border-bottom py-2">
+                        <h6 class="mb-0">Jumat</h6>
+                        <span>08.00 - 11.00 WIB</span>
                     </div>
+
+                    <div class="d-flex justify-content-between py-2">
+                        <h6 class="mb-0">Sabtu / Minggu</h6>
+                        <span class="text-primary fw-bold">Tutup</span>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Bootstrap & FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Service End -->
 
 
     <!-- Testimonial Start -->
     <div class="container-xxl py-5">
         <div class="container">
+
+            <!-- Judul -->
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <p class="d-inline-block bg-secondary text-primary py-1 px-4">Testimonial</p>
-                <h1 class="text-uppercase">What Our Clients Say!</h1>
+                <p class="d-inline-block bg-secondary text-primary py-1 px-4">
+                    Testimoni Masyarakat
+                </p>
+                <h1 class="text-uppercase">
+                    Apa Kata Masyarakat
+                </h1>
             </div>
+
+            <!-- Carousel -->
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+
+                <!-- Item 1 -->
                 <div class="testimonial-item text-center"
-                    data-dot="<img class='img-fluid' src='{{ asset('asset/img/testimonial-1.jpg') }}' alt=''>">
-                    <h4 class="text-uppercase">Client Name</h4>
-                    <p class="text-primary">Profession</p>
-                    <span class="fs-5">Clita clita tempor justo dolor ipsum amet kasd amet duo justo duo duo labore sed
-                        sed. Magna ut diam sit et amet stet eos sed clita erat magna elitr erat sit sit erat at rebum justo
-                        sea clita.</span>
+                    data-dot="<img class='img-fluid' src='{{ asset('asset/img/elon musk.jpg') }}' alt=''>">
+                    <h4 class="text-uppercase">Elon Musk</h4>
+                    <p class="text-primary">Warga Kecamatan Sukamaju</p>
+                    <span class="fs-5">
+                        Pelayanan administrasi kependudukan sangat cepat dan
+                        petugasnya ramah. Proses pembuatan KTP dan KK jadi lebih mudah
+                        dan tidak berbelit-belit.
+                    </span>
                 </div>
+
+                <!-- Item 2 -->
                 <div class="testimonial-item text-center"
-                    data-dot="<img class='img-fluid' src='{{ asset('asset/img/testimonial-2.jpg') }}' alt=''>">
-                    <h4 class="text-uppercase">Client Name</h4>
-                    <p class="text-primary">Profession</p>
-                    <span class="fs-5">Clita clita tempor justo dolor ipsum amet kasd amet duo justo duo duo labore sed
-                        sed. Magna ut diam sit et amet stet eos sed clita erat magna elitr erat sit sit erat at rebum justo
-                        sea clita.</span>
+                    data-dot="<img class='img-fluid' src='{{ asset('asset/img/mark.jpg') }}' alt=''>">
+                    <h4 class="text-uppercase">Mark Zuckerberg</h4>
+                    <p class="text-primary">Warga Kecamatan Melati</p>
+                    <span class="fs-5">
+                        Informasi pelayanan sangat jelas dan mudah dipahami.
+                        Pengurusan akta kelahiran selesai tepat waktu sesuai jadwal.
+                    </span>
                 </div>
+
+                <!-- Item 3 -->
                 <div class="testimonial-item text-center"
-                    data-dot="<img class='img-fluid' src='{{ asset('asset/img/testimonial-3.jpg') }}' alt=''>">
-                    <h4 class="text-uppercase">Client Name</h4>
-                    <p class="text-primary">Profession</p>
-                    <span class="fs-5">Clita clita tempor justo dolor ipsum amet kasd amet duo justo duo duo labore sed
-                        sed. Magna ut diam sit et amet stet eos sed clita erat magna elitr erat sit sit erat at rebum justo
-                        sea clita.</span>
+                    data-dot="<img class='img-fluid' src='{{ asset('asset/img/jokowi.jpg') }}' alt=''>">
+                    <h4 class="text-uppercase">Joko Widodo</h4>
+                    <p class="text-primary">Warga Kecamatan Harapan</p>
+                    <span class="fs-5">
+                        Pelayanan online membantu sekali, tidak perlu antre lama.
+                        Semoga kualitas pelayanan seperti ini terus dipertahankan.
+                        Pokok e mantap rek!
+                    </span>
                 </div>
+
             </div>
         </div>
     </div>
