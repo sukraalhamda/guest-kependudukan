@@ -63,4 +63,5 @@ Route::middleware(['checkislogin', 'checkrole:admin'])->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('anggota_keluarga', AnggotaKeluargaController::class);
     Route::resource('peristiwa_kelahiran', PeristiwaKelahiranController::class);
+
 });
