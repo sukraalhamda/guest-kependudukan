@@ -72,6 +72,7 @@
         </div>
     </div>
     <!-- About End -->
+<<<<<<< HEAD
 
 
     <!-- Service Start -->
@@ -444,3 +445,6 @@
         </div>
         <!-- Testimonial End -->
     @endsection
+=======
+@endsection
+>>>>>>> b5345530eeefc3897466bb045fc9ac9073d51799
