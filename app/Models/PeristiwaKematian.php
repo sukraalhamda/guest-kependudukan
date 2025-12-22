@@ -4,26 +4,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PeristiwaKelahiran extends Model
+class PeristiwaKematian extends Model
 {
     use HasFactory;
 
-    protected $table      = 'peristiwa_kelahiran';
-    protected $primaryKey = 'kelahiran_id';
+    protected $table      = 'peristiwa_kematian';
+    protected $primaryKey = 'kematian_id';
 
     protected $fillable = [
         'warga_id',
-        'tgl_lahir',
-        'tempat_lahir',
-        'ayah_warga_id',
-        'ibu_warga_id',
-        'no_akta',
+        'tgl_meninggal',
+        'sebab',
+        'lokasi',
+        'no_surat',
     ];
 
     public function media()
     {
-        return $this->hasMany(Media::class, 'ref_id', 'kelahiran_id')
-            ->where('ref_table', 'peristiwa_kelahiran')
+        return $this->hasMany(Media::class, 'ref_id', 'kematian_id')
+            ->where('ref_table', 'peristiwa_kematian')
             ->orderBy('sort_order', 'asc');
     }
 

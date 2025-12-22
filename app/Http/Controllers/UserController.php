@@ -3,22 +3,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Media;
 use App\Models\User;
-use DB;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        // ✅ USER boleh akses INDEX saja (lihat data)
-        // ✅ ADMIN boleh semua
         $this->middleware(function ($request, $next) {
+            $user = Auth::user();
 
-            if (Auth::user()->role === 'user') {
+            // User biasa hanya boleh akses index
+            if ($user && $user->role === 'user') {
                 $allowed = ['index'];
 
                 if (! in_array($request->route()->getActionMethod(), $allowed)) {
@@ -30,41 +28,46 @@ class UserController extends Controller
         });
     }
 
-    /**
-     * LIST USER (ADMIN & USER)
-     */
+    // =====================
+    // LIST USER
+    // =====================
     public function index(Request $request)
     {
         $filterable = ['role'];
         $searchable = ['name', 'email'];
 
-        $user = User::filter($request, $filterable)
+        $users = User::filter($request, $filterable)
             ->search($request, $searchable)
             ->paginate(9)
             ->withQueryString();
 
-        return view('pages.user.index', compact('user'));
+        return view('pages.user.index', compact('users'));
     }
 
-    /**
-     * CREATE (ADMIN ONLY)
-     */
+    // =====================
+    // FORM CREATE USER (ADMIN)
+    // =====================
     public function create()
     {
-        return view('pages.user.create');
+        $roles = [
+            'admin' => 'Admin',
+            'user'  => 'User',
+        ];
+
+        return view('pages.user.create', compact('roles'));
     }
 
-    /**
-     * STORE (ADMIN ONLY)
-     */
+    // =====================
+    // SIMPAN USER BARU (ADMIN)
+    // =====================
     public function store(Request $request)
     {
         $request->validate([
             'name'     => 'required|max:255',
             'email'    => 'required|email|unique:users,email',
+            'password' => 'required|confirmed|min:8',
             'role'     => 'required|in:admin,user',
-            'password' => 'required|min:6|confirmed',
-            'photo'    => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'photo'    => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $user = User::create([
@@ -85,28 +88,35 @@ class UserController extends Controller
             ]);
         }
 
-        return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan');
+        return redirect()
+            ->route('user.index')
+            ->with('success', 'User berhasil ditambahkan');
     }
 
-    /**
-     * EDIT (ADMIN ONLY)
-     */
+    // =====================
+    // FORM EDIT USER (ADMIN)
+    // =====================
     public function edit(User $user)
     {
-        return view('pages.user.edit', compact('user'));
+        $roles = [
+            'admin' => 'Admin',
+            'user'  => 'User',
+        ];
+
+        return view('pages.user.edit', compact('user', 'roles'));
     }
 
-    /**
-     * UPDATE (ADMIN ONLY)
-     */
+    // =====================
+    // UPDATE USER (ADMIN)
+    // =====================
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name'  => 'required',
+            'name'  => 'required|max:255',
             'email' => "required|email|unique:users,email,{$user->id}",
             'role'     => 'required|in:admin,user',
-            'password' => 'nullable|min:6|confirmed',
-            'photo'    => 'nullable|image|max:2048',
+            'password' => 'nullable|confirmed|min:6',
+            'photo'    => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $data = $request->only(['name', 'email', 'role']);
@@ -118,9 +128,7 @@ class UserController extends Controller
         $user->update($data);
 
         if ($request->hasFile('photo')) {
-
-            $old = DB::table('media')
-                ->where('ref_table', 'users')
+            $old = Media::where('ref_table', 'users')
                 ->where('ref_id', $user->id)
                 ->first();
 
@@ -128,10 +136,7 @@ class UserController extends Controller
                 Storage::disk('public')->delete($old->file_name);
             }
 
-            DB::table('media')
-                ->where('ref_table', 'users')
-                ->where('ref_id', $user->id)
-                ->delete();
+            $old?->delete();
 
             $path = $request->file('photo')->store('users', 'public');
 
@@ -139,18 +144,33 @@ class UserController extends Controller
                 'ref_table' => 'users',
                 'ref_id'    => $user->id,
                 'file_name' => $path,
+                'mime_type' => $request->file('photo')->getClientMimeType(),
             ]);
         }
 
-        return redirect()->route('user.index')->with('success', 'User berhasil diperbarui');
+        return redirect()
+            ->route('user.index')
+            ->with('success', 'User berhasil diperbarui');
     }
 
-    /**
-     * DELETE (ADMIN ONLY)
-     */
+    // =====================
+    // DELETE USER (ADMIN)
+    // =====================
     public function destroy(User $user)
     {
+        $media = Media::where('ref_table', 'users')
+            ->where('ref_id', $user->id)
+            ->first();
+
+        if ($media && Storage::disk('public')->exists($media->file_name)) {
+            Storage::disk('public')->delete($media->file_name);
+        }
+
+        $media?->delete();
         $user->delete();
-        return redirect()->route('user.index')->with('success', 'User berhasil dihapus');
+
+        return redirect()
+            ->route('user.index')
+            ->with('success', 'User berhasil dihapus');
     }
 }

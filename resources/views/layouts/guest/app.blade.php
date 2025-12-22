@@ -33,8 +33,7 @@
 
 
     <!-- Back to Top -->
-    <a href="https://wa.me/628123456789?text=Halo%20saya%20ingin%20bertanya" class="whatsapp-float"
-        target="_blank">
+    <a href="https://wa.me/628123456789?text=Halo%20saya%20ingin%20bertanya" class="whatsapp-float" target="_blank">
         <ion-icon name="logo-whatsapp"></ion-icon>
     </a>
 

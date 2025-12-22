@@ -15,7 +15,7 @@
             </div>
 
             <div class="row g-4">
-                @foreach ($user as $u)
+                @foreach ($users as $u)
                     <div class="col-md-4">
                         <div class="kk-barber-card">
 

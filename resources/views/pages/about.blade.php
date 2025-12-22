@@ -53,37 +53,56 @@
     <div class="container-xxl py-5">
         <div class="container">
 
+            <!-- JUDUL -->
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <p class="d-inline-block bg-secondary text-primary py-1 px-4">Profil</p>
-                <h1 class="text-uppercase">Penanggung Jawab Layanan</h1>
+                <p class="d-inline-block bg-secondary text-primary py-1 px-4">
+                    Profil Pengembang
+                </p>
+                <h1 class="text-uppercase">
+                    Identitas Developer Sistem
+                </h1>
             </div>
 
+            <!-- CARD DEVELOPER -->
             <div class="row justify-content-center">
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
                     <div class="team-item">
 
+                        <!-- FOTO -->
                         <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('asset/img/sukra.jpg') }}" alt="Petugas Pelayanan">
+                            <img class="img-fluid" src="{{ asset('asset/img/sukra.jpg') }}" alt="Developer">
 
-                            <!-- SOCIAL MEDIA (TETAP ADA) -->
+                            <!-- SOSIAL MEDIA -->
                             <div class="team-social">
-                                <a class="btn btn-square" href="#">
-                                    <i class="fab fa-facebook-f"></i>
+                                <a class="btn btn-square" href="https://www.linkedin.com/" target="_blank">
+                                    <i class="fab fa-linkedin-in"></i>
                                 </a>
-                                <a class="btn btn-square" href="#">
-                                    <i class="fab fa-twitter"></i>
+                                <a class="btn btn-square" href="https://github.com/" target="_blank">
+                                    <i class="fab fa-github"></i>
                                 </a>
-                                <a class="btn btn-square" href="#">
+                                <a class="btn btn-square" href="https://www.instagram.com/" target="_blank">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                             </div>
                         </div>
 
+                        <!-- INFO -->
                         <div class="bg-secondary text-center p-4">
-                            <h5 class="text-uppercase mb-1">Nama Pejabat</h5>
-                            <span class="text-primary">
-                                Penanggung Jawab Administrasi Kependudukan
+                            <h5 class="text-uppercase mb-1">
+                                Sukra Alhamda
+                            </h5>
+
+                            <span class="text-primary d-block mb-2">
+                                NIM : 2457301139
                             </span>
+
+                            <small class="text-light-50 d-block">
+                                Program Studi Sistem Informasi
+                            </small>
+
+                            <small class="text-light-50">
+                                Politeknik Caltex Riau
+                            </small>
                         </div>
 
                     </div>
@@ -91,10 +110,6 @@
             </div>
 
         </div>
-    </div>
-    <!-- End Team Item -->
-    </div>
-    </div>
     </div>
     <!-- Team End -->
 @endsection

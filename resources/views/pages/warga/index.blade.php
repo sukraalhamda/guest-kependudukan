@@ -1,71 +1,95 @@
 @extends('layouts.guest.app')
+
 @section('content')
     <div class="container-fluid pt-4 px-4">
         <div class="bg-secondary rounded p-4">
 
-            <div class="d-flex align-items-center justify-content-between mb-4">
+            {{-- HEADER --}}
+            <div class="d-flex justify-content-between align-items-center mb-3">
                 <h4 class="text-white">Data Warga</h4>
-
                 <a href="{{ route('warga.create') }}" class="btn btn-primary">
-                    <i class="fa fa-plus me-2"></i>Tambah Data
+                    <i class="fa fa-plus me-2"></i>Tambah
                 </a>
             </div>
 
-            <!-- 🔍 FORM SEARCH + FILTER JENIS KELAMIN -->
-            <form action="" method="GET" class="d-flex mb-3" style="max-width: 450px;">
+            {{-- SEARCH + FILTER --}}
+            <form method="GET" class="mb-4" style="max-width:500px;">
+                <div class="row g-2">
+                    <div class="col-md-6">
+                        <input type="text" name="search" class="form-control" placeholder="Cari nama warga..."
+                            value="{{ request('search') }}">
+                    </div>
 
-                <input type="text" name="search" class="form-control me-2" placeholder="Cari nama warga..."
-                    value="{{ request('search') }}" style="height: 38px;">
+                    <div class="col-md-4">
+                        <select name="jenis_kelamin" class="form-control">
+                            <option value="">Semua</option>
+                            <option value="L" {{ request('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki
+                            </option>
+                            <option value="P" {{ request('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan
+                            </option>
+                        </select>
+                    </div>
 
-                <select name="jenis_kelamin" class="form-control me-2" style="height: 38px;">
-                    <option value="">Semua</option>
-                    <option value="L" {{ request('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki</option>
-                    <option value="P" {{ request('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan</option>
-                </select>
-
-                <button class="btn btn-primary" style="height: 38px;">Filter</button>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary w-100">Filter</button>
+                    </div>
+                </div>
             </form>
 
+            {{-- CARD --}}
             <div class="row g-4">
-
-                @forelse($data as $item)
+                @forelse($data as $w)
                     <div class="col-md-4">
-                        <div class="kk-barber-card">
+                        <div class="card bg-dark text-white shadow h-100" data-bs-toggle="modal"
+                            data-bs-target="#modal{{ $w->warga_id }}" style="cursor:pointer">
 
-                            <!-- Foto Warga -->
-                            <img src="{{ asset('asset/img/zayn.jpg') }}" class="kk-barber-image">
+                            <img src="{{ asset('asset/img/zayn.jpg') }}" class="card-img-top"
+                                style="height:240px;object-fit:cover">
 
-                            <div class="kk-barber-body">
+                            <div class="card-body text-center">
+                                <h5 class="fw-bold">{{ strtoupper($w->nama) }}</h5>
+                                <small class="text-muted">Klik untuk detail</small>
+                            </div>
+                        </div>
+                    </div>
 
-                                <div class="kk-title">{{ strtoupper($item->nama) }}</div>
+                    {{-- MODAL DETAIL --}}
+                    <div class="modal fade" id="modal{{ $w->warga_id }}" tabindex="-1">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content bg-dark text-white">
 
-                                <div class="kk-desc">NIK: {{ $item->nik }}</div>
-
-                                <div class="kk-subtext">
-                                    Jenis Kelamin: {{ $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}
+                                <div class="modal-header border-secondary">
+                                    <h5 class="modal-title">Detail Warga</h5>
+                                    <button type="button" class="btn-close btn-close-white"
+                                        data-bs-dismiss="modal"></button>
                                 </div>
 
-                                <div class="kk-subtext">
-                                    TTL: {{ $item->tempat_lahir }}, {{ $item->tanggal_lahir }}
+                                <div class="modal-body text-center">
+                                    <img src="{{ asset('asset/img/zayn.jpg') }}" class="img-fluid rounded mb-3">
+
+                                    <p class="text-danger mb-3 text-start">
+                                        <strong>NIK</strong> : {{ $w->nik }} <br>
+                                        <strong>Jenis Kelamin</strong> :
+                                        {{ $w->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }} <br>
+                                        <strong>TTL</strong> : {{ $w->tempat_lahir }}, {{ $w->tanggal_lahir }} <br>
+                                        <strong>Agama</strong> : {{ $w->agama }} <br>
+                                        <strong>Pendidikan</strong> : {{ $w->pendidikan }} <br>
+                                        <strong>Pekerjaan</strong> : {{ $w->pekerjaan }} <br>
+                                        <strong>Status Kawin</strong> : {{ $w->status_perkawinan }} <br>
+                                        <strong>Status Keluarga</strong> : {{ $w->status_dalam_keluarga }}
+                                    </p>
                                 </div>
 
-                                <div class="kk-subtext">Agama: {{ $item->agama }}</div>
-                                <div class="kk-subtext">Pendidikan: {{ $item->pendidikan }}</div>
-                                <div class="kk-subtext">Pekerjaan: {{ $item->pekerjaan }}</div>
-                                <div class="kk-subtext">Status Kawin: {{ $item->status_perkawinan }}</div>
-                                <div class="kk-subtext">Dalam Keluarga: {{ $item->status_dalam_keluarga }}</div>
-
-                                <div class="kk-actions">
-                                    <a href="{{ route('warga.edit', $item->warga_id) }}" class="btn btn-warning kk-btn">
+                                <div class="modal-footer justify-content-center">
+                                    <a href="{{ route('warga.edit', $w->warga_id) }}" class="btn btn-warning">
                                         <i class="fa fa-edit"></i>
                                     </a>
 
-                                    <form action="{{ route('warga.destroy', $item->warga_id) }}" method="POST"
-                                        onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                    <form method="POST" action="{{ route('warga.destroy', $w->warga_id) }}"
+                                        onsubmit="return confirm('Yakin hapus data?')">
                                         @csrf
                                         @method('DELETE')
-
-                                        <button type="submit" class="btn btn-danger kk-btn">
+                                        <button class="btn btn-danger">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
@@ -76,9 +100,8 @@
                     </div>
 
                 @empty
-                    <div class="col-12 text-center text-white">Belum ada data warga</div>
+                    <div class="text-center text-white">Belum ada data warga</div>
                 @endforelse
-
             </div>
 
             {{-- PAGINATION --}}
