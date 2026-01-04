@@ -64,15 +64,15 @@
             </div>
 
             <!-- CARD DEVELOPER -->
-            <div class="row justify-content-center">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+            <div class="row justify-content-center g-4">
+
+                <!-- DEVELOPER 1 (KIRI) -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
                     <div class="team-item">
 
-                        <!-- FOTO -->
                         <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('asset/img/sukra.jpg') }}" alt="Developer">
+                            <img class="img-fluid" src="{{ asset('asset/img/sukra.jpg') }}" alt="Developer 1">
 
-                            <!-- SOSIAL MEDIA -->
                             <div class="team-social">
                                 <a class="btn btn-square" href="https://www.linkedin.com/" target="_blank">
                                     <i class="fab fa-linkedin-in"></i>
@@ -86,29 +86,47 @@
                             </div>
                         </div>
 
-                        <!-- INFO -->
                         <div class="bg-secondary text-center p-4">
-                            <h5 class="text-uppercase mb-1">
-                                Sukra Alhamda
-                            </h5>
-
-                            <span class="text-primary d-block mb-2">
-                                NIM : 2457301139
-                            </span>
-
-                            <small class="text-light-50 d-block">
-                                Program Studi Sistem Informasi
-                            </small>
-
-                            <small class="text-light-50">
-                                Politeknik Caltex Riau
-                            </small>
+                            <h5 class="text-uppercase mb-1">Sukra Alhamda</h5>
+                            <span class="text-primary d-block mb-2">NIM : 2457301139</span>
+                            <small class="text-light-50 d-block">Program Studi Sistem Informasi</small>
+                            <small class="text-light-50">Politeknik Caltex Riau</small>
                         </div>
 
                     </div>
                 </div>
-            </div>
 
+                <!-- DEVELOPER 2 (KANAN) -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="team-item">
+
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid" src="{{ asset('asset/img/developer2.jpg') }}" alt="Developer 2">
+
+                            <div class="team-social">
+                                <a class="btn btn-square" href="#" target="_blank">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a class="btn btn-square" href="#" target="_blank">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a class="btn btn-square" href="#" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="bg-secondary text-center p-4">
+                            <h5 class="text-uppercase mb-1">Nama Developer 2</h5>
+                            <span class="text-primary d-block mb-2">NIM : 24573011XX</span>
+                            <small class="text-light-50 d-block">Program Studi Sistem Informasi</small>
+                            <small class="text-light-50">Politeknik Caltex Riau</small>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
     <!-- Team End -->
