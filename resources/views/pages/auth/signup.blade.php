@@ -636,20 +636,6 @@
                                 <span>Password tidak cocok</span>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="form-label required">Role</label>
-                            <select name="role" class="form-control" required>
-                                <option value="">-- Pilih Role --</option>
-                                <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="user" {{ old('role') === 'user' ? 'selected' : '' }}>User</option>
-                            </select>
-
-                            <small class="text-muted d-block">Pilih <b>Admin</b> untuk akses penuh, <b>User</b> hanya
-                                bisa melihat data</small>
-                        </div>
-
-
                         <button type="submit" class="btn-signup" id="signupButton" disabled>
                             <span id="buttonText">Daftar</span>
                             <div class="loading" id="loadingSpinner"></div>

@@ -498,7 +498,6 @@
                 <!-- Tab Navigation -->
                 <div class="form-tabs">
                     <button class="tab-btn active" id="loginTab">MASUK</button>
-                    <button class="tab-btn" id="signupTab">DAFTAR</button>
                 </div>
 
                 <!-- Login Form -->
@@ -552,231 +551,154 @@
                             <span id="loginButtonText">Masuk</span>
                             <div class="loading" id="loginLoading"></div>
                         </button>
-                    </form>
-                </div>
-
-                <!-- Signup Form -->
-                <div id="signupFormContainer" class="form-card" style="display: none;">
-                    <div class="form-header">
-                        <h2>Buat Akun Baru</h2>
-                        <p>Daftar untuk mengakses sistem kependudukan</p>
+                       <div class="signup-footer">
+                        Belum punya akun? <a href="{{ route('signup') }}">Daftar disini</a>
                     </div>
-
-                    <form action="{{ route('signup') }}" method="POST" id="signupForm">
-                        @csrf
-
-                        @if ($errors->any() && request()->route()->getName() == 'signup')
-                            <div class="alert"
-                                style="background: rgba(220, 53, 69, 0.1); border-color: rgba(220, 53, 69, 0.3); color: #ff8a8a; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem;">
-                                <i class="fas fa-exclamation-circle"></i>
-                                <span>{{ $errors->first() }}</span>
-                            </div>
-                        @endif
-
-                        @if (session('success') && request()->route()->getName() == 'signup')
-                            <div class="alert"
-                                style="background: rgba(40, 167, 69, 0.1); border-color: rgba(40, 167, 69, 0.3); color: #8affaa; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem;">
-                                <i class="fas fa-check-circle"></i>
-                                <span>{{ session('success') }}</span>
-                            </div>
-                        @endif
-
-                        <div class="form-group">
-                            <label class="form-label required">Nama Lengkap</label>
-                            <div class="input-group">
-                                <i class="fas fa-user input-icon"></i>
-                                <input type="text" name="name" class="form-control"
-                                    placeholder="Masukkan nama lengkap" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label required">Email</label>
-                            <div class="input-group">
-                                <i class="fas fa-envelope input-icon"></i>
-                                <input type="email" name="email" class="form-control"
-                                    placeholder="contoh@email.com" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label required">Password</label>
-                            <div class="input-group">
-                                <i class="fas fa-lock input-icon"></i>
-                                <input type="password" name="password" id="signupPassword" class="form-control"
-                                    placeholder="Minimal 8 karakter" required>
-                                <button type="button" class="password-toggle" id="toggleSignupPassword">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label required">Konfirmasi Password</label>
-                            <div class="input-group">
-                                <i class="fas fa-lock input-icon"></i>
-                                <input type="password" name="password_confirmation" id="confirmPassword"
-                                    class="form-control" placeholder="Ulangi password" required>
-                                <button type="button" class="password-toggle" id="toggleConfirmPassword">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <input type="hidden" name="role" value="user">
-
-                        <button type="submit" class="btn-submit" id="signupButton">
-                            <span id="signupButtonText">Daftar</span>
-                            <div class="loading" id="signupLoading"></div>
-                        </button>
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        // Tab Switching
-        const loginTab = document.getElementById('loginTab');
-        const signupTab = document.getElementById('signupTab');
-        const loginFormContainer = document.getElementById('loginFormContainer');
-        const signupFormContainer = document.getElementById('signupFormContainer');
+                <script>
+                    // Tab Switching
+                    const loginTab = document.getElementById('loginTab');
+                    const signupTab = document.getElementById('signupTab');
+                    const loginFormContainer = document.getElementById('loginFormContainer');
+                    const signupFormContainer = document.getElementById('signupFormContainer');
 
-        loginTab.addEventListener('click', () => {
-            loginTab.classList.add('active');
-            signupTab.classList.remove('active');
-            loginFormContainer.style.display = 'block';
-            signupFormContainer.style.display = 'none';
-            loginFormContainer.style.animation = 'slideIn 0.3s ease';
-        });
+                    loginTab.addEventListener('click', () => {
+                        loginTab.classList.add('active');
+                        signupTab.classList.remove('active');
+                        loginFormContainer.style.display = 'block';
+                        signupFormContainer.style.display = 'none';
+                        loginFormContainer.style.animation = 'slideIn 0.3s ease';
+                    });
 
-        signupTab.addEventListener('click', () => {
-            signupTab.classList.add('active');
-            loginTab.classList.remove('active');
-            signupFormContainer.style.display = 'block';
-            loginFormContainer.style.display = 'none';
-            signupFormContainer.style.animation = 'slideIn 0.3s ease';
-        });
+                    signupTab.addEventListener('click', () => {
+                        signupTab.classList.add('active');
+                        loginTab.classList.remove('active');
+                        signupFormContainer.style.display = 'block';
+                        loginFormContainer.style.display = 'none';
+                        signupFormContainer.style.animation = 'slideIn 0.3s ease';
+                    });
 
-        // Password visibility toggle
-        const toggleLoginPassword = document.getElementById('toggleLoginPassword');
-        const toggleSignupPassword = document.getElementById('toggleSignupPassword');
-        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
-        const loginPassword = document.getElementById('loginPassword');
-        const signupPassword = document.getElementById('signupPassword');
-        const confirmPassword = document.getElementById('confirmPassword');
+                    // Password visibility toggle
+                    const toggleLoginPassword = document.getElementById('toggleLoginPassword');
+                    const toggleSignupPassword = document.getElementById('toggleSignupPassword');
+                    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+                    const loginPassword = document.getElementById('loginPassword');
+                    const signupPassword = document.getElementById('signupPassword');
+                    const confirmPassword = document.getElementById('confirmPassword');
 
-        function setupPasswordToggle(toggleBtn, passwordInput) {
-            toggleBtn.addEventListener('click', function() {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                const icon = this.querySelector('i');
-                icon.classList.toggle('fa-eye');
-                icon.classList.toggle('fa-eye-slash');
-            });
-        }
+                    function setupPasswordToggle(toggleBtn, passwordInput) {
+                        toggleBtn.addEventListener('click', function() {
+                            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                            passwordInput.setAttribute('type', type);
+                            const icon = this.querySelector('i');
+                            icon.classList.toggle('fa-eye');
+                            icon.classList.toggle('fa-eye-slash');
+                        });
+                    }
 
-        setupPasswordToggle(toggleLoginPassword, loginPassword);
-        setupPasswordToggle(toggleSignupPassword, signupPassword);
-        setupPasswordToggle(toggleConfirmPassword, confirmPassword);
+                    setupPasswordToggle(toggleLoginPassword, loginPassword);
+                    setupPasswordToggle(toggleSignupPassword, signupPassword);
+                    setupPasswordToggle(toggleConfirmPassword, confirmPassword);
 
-        // Form submission with loading state
-        const loginForm = document.getElementById('loginForm');
-        const signupForm = document.getElementById('signupForm');
-        const loginButton = document.getElementById('loginButton');
-        const signupButton = document.getElementById('signupButton');
-        const loginButtonText = document.getElementById('loginButtonText');
-        const signupButtonText = document.getElementById('signupButtonText');
-        const loginLoading = document.getElementById('loginLoading');
-        const signupLoading = document.getElementById('signupLoading');
+                    // Form submission with loading state
+                    const loginForm = document.getElementById('loginForm');
+                    const signupForm = document.getElementById('signupForm');
+                    const loginButton = document.getElementById('loginButton');
+                    const signupButton = document.getElementById('signupButton');
+                    const loginButtonText = document.getElementById('loginButtonText');
+                    const signupButtonText = document.getElementById('signupButtonText');
+                    const loginLoading = document.getElementById('loginLoading');
+                    const signupLoading = document.getElementById('signupLoading');
 
-        loginForm.addEventListener('submit', function(e) {
-            const email = this.querySelector('input[name="email"]');
-            const password = this.querySelector('input[name="password"]');
+                    loginForm.addEventListener('submit', function(e) {
+                        const email = this.querySelector('input[name="email"]');
+                        const password = this.querySelector('input[name="password"]');
 
-            // Basic validation
-            if (!email.value.trim() || !password.value.trim()) {
-                e.preventDefault();
-                showError(email, 'Harap isi semua field');
-                return;
-            }
-
-            // Show loading state
-            loginButtonText.style.opacity = '0.5';
-            loginLoading.style.display = 'block';
-            loginButton.disabled = true;
-        });
-
-        signupForm.addEventListener('submit', function(e) {
-            const name = this.querySelector('input[name="name"]');
-            const email = this.querySelector('input[name="email"]');
-            const password = this.querySelector('input[name="password"]');
-            const confirm = this.querySelector('input[name="password_confirmation"]');
-
-            // Basic validation
-            if (!name.value.trim() || !email.value.trim() || !password.value.trim() || !confirm.value.trim()) {
-                e.preventDefault();
-                showError(name, 'Harap isi semua field');
-                return;
-            }
-
-            // Password validation
-            if (password.value !== confirm.value) {
-                e.preventDefault();
-                showError(confirm, 'Password tidak cocok');
-                return;
-            }
-
-            // Show loading state
-            signupButtonText.style.opacity = '0.5';
-            signupLoading.style.display = 'block';
-            signupButton.disabled = true;
-        });
-
-        function showError(input, message) {
-            // Create error element
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'error-message';
-            errorDiv.style.color = 'var(--primary)';
-            errorDiv.style.fontSize = '0.8rem';
-            errorDiv.style.marginTop = '5px';
-            errorDiv.style.display = 'flex';
-            errorDiv.style.alignItems = 'center';
-            errorDiv.style.gap = '5px';
-            errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
-
-            input.parentElement.parentElement.appendChild(errorDiv);
-
-            // Remove error after 3 seconds
-            setTimeout(() => {
-                if (errorDiv.parentElement) {
-                    errorDiv.remove();
-                }
-            }, 3000);
-        }
-
-        // Auto remove alerts
-        document.addEventListener('DOMContentLoaded', function() {
-            const alerts = document.querySelectorAll('.alert');
-            alerts.forEach(alert => {
-                setTimeout(() => {
-                    alert.style.opacity = '0';
-                    alert.style.transform = 'translateY(-10px)';
-                    setTimeout(() => {
-                        if (alert.parentElement) {
-                            alert.remove();
+                        // Basic validation
+                        if (!email.value.trim() || !password.value.trim()) {
+                            e.preventDefault();
+                            showError(email, 'Harap isi semua field');
+                            return;
                         }
-                    }, 300);
-                }, 5000);
-            });
 
-            // Check URL for active tab
-            const path = window.location.pathname;
-            if (path.includes('signup') || (window.location.search.includes('tab=signup'))) {
-                signupTab.click();
-            }
-        });
-    </script>
+                        // Show loading state
+                        loginButtonText.style.opacity = '0.5';
+                        loginLoading.style.display = 'block';
+                        loginButton.disabled = true;
+                    });
+
+                    signupForm.addEventListener('submit', function(e) {
+                        const name = this.querySelector('input[name="name"]');
+                        const email = this.querySelector('input[name="email"]');
+                        const password = this.querySelector('input[name="password"]');
+                        const confirm = this.querySelector('input[name="password_confirmation"]');
+
+                        // Basic validation
+                        if (!name.value.trim() || !email.value.trim() || !password.value.trim() || !confirm.value.trim()) {
+                            e.preventDefault();
+                            showError(name, 'Harap isi semua field');
+                            return;
+                        }
+
+                        // Password validation
+                        if (password.value !== confirm.value) {
+                            e.preventDefault();
+                            showError(confirm, 'Password tidak cocok');
+                            return;
+                        }
+
+                        // Show loading state
+                        signupButtonText.style.opacity = '0.5';
+                        signupLoading.style.display = 'block';
+                        signupButton.disabled = true;
+                    });
+
+                    function showError(input, message) {
+                        // Create error element
+                        const errorDiv = document.createElement('div');
+                        errorDiv.className = 'error-message';
+                        errorDiv.style.color = 'var(--primary)';
+                        errorDiv.style.fontSize = '0.8rem';
+                        errorDiv.style.marginTop = '5px';
+                        errorDiv.style.display = 'flex';
+                        errorDiv.style.alignItems = 'center';
+                        errorDiv.style.gap = '5px';
+                        errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+
+                        input.parentElement.parentElement.appendChild(errorDiv);
+
+                        // Remove error after 3 seconds
+                        setTimeout(() => {
+                            if (errorDiv.parentElement) {
+                                errorDiv.remove();
+                            }
+                        }, 3000);
+                    }
+
+                    // Auto remove alerts
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const alerts = document.querySelectorAll('.alert');
+                        alerts.forEach(alert => {
+                            setTimeout(() => {
+                                alert.style.opacity = '0';
+                                alert.style.transform = 'translateY(-10px)';
+                                setTimeout(() => {
+                                    if (alert.parentElement) {
+                                        alert.remove();
+                                    }
+                                }, 300);
+                            }, 5000);
+                        });
+
+                        // Check URL for active tab
+                        const path = window.location.pathname;
+                        if (path.includes('signup') || (window.location.search.includes('tab=signup'))) {
+                            signupTab.click();
+                        }
+                    });
+                </script>
 </body>
 
 </html>
