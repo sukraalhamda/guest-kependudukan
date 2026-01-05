@@ -14,8 +14,9 @@ class DatabaseSeeder extends Seeder
             CreateWargaDummy::class,
             CreateKeluargaKKDummy::class,
             CreateAnggotaKeluargaDummy::class,
-            UserFactory::class,
             CreatePeristiwaKelahiranDummy::class,
+            CreatePeristiwaKematianDummy::class,
+            CreatePeristiwaPindahDummy::class,
         ]);
     }
 }

@@ -16,7 +16,7 @@ class CreatePeristiwaKelahiranDummy extends Seeder
         // Ambil semua warga_id
         $wargaIds = DB::table('warga')->pluck('warga_id')->toArray();
 
-        foreach (range(1, 100) as $i) {
+        foreach (range(1, 30) as $i) {
 
             // pilih anak
             $anak = $faker->randomElement($wargaIds);
