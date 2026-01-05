@@ -2,9 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Media;
-use App\Models\PeristiwaKelahiran;
+use App\Models\warga;
 use Illuminate\Http\Request;
 
+use App\Models\PeristiwaKelahiran;
 use Illuminate\Support\Facades\Storage;
 
 class PeristiwaKelahiranController extends Controller
@@ -26,9 +27,10 @@ class PeristiwaKelahiranController extends Controller
 
         return view('pages.peristiwakelahiran.index', compact('kelahiran'));
     }
-    public function create()
+     public function create()
     {
-        return view('pages.peristiwakelahiran.create');
+        $warga = warga::all();
+        return view('pages.peristiwakelahiran.create', compact('warga'));
     }
 
     public function store(Request $request)
