@@ -102,24 +102,24 @@
                     <div class="team-item">
 
                         <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('asset/img/developer2.jpg') }}" alt="Developer 2">
+                            <img class="img-fluid" src="{{ asset('asset/img/fajar.jpg') }}" alt="Developer 2">
 
                             <div class="team-social">
-                                <a class="btn btn-square" href="#" target="_blank">
+                                <a class="btn btn-square" href="https://linkedin.com/in/FajarFarhan2010" target="_blank">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
-                                <a class="btn btn-square" href="#" target="_blank">
+                                <a class="btn btn-square" href="https://github.com/fajar24si-hub" target="_blank">
                                     <i class="fab fa-github"></i>
                                 </a>
-                                <a class="btn btn-square" href="#" target="_blank">
+                                <a class="btn btn-square" href="https://instagram.com/fajar_farhan20" target="_blank">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                             </div>
                         </div>
 
                         <div class="bg-secondary text-center p-4">
-                            <h5 class="text-uppercase mb-1">Nama Developer 2</h5>
-                            <span class="text-primary d-block mb-2">NIM : 24573011XX</span>
+                            <h5 class="text-uppercase mb-1">Fajar Farhan</h5>
+                            <span class="text-primary d-block mb-2">NIM : 2457301044</span>
                             <small class="text-light-50 d-block">Program Studi Sistem Informasi</small>
                             <small class="text-light-50">Politeknik Caltex Riau</small>
                         </div>
