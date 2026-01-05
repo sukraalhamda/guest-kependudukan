@@ -69,8 +69,15 @@
                         <small class="text-light">Opsional. Max 2MB per file.</small>
                     </div>
 
-                    <button type="submit" class="btn btn-primary px-4">Simpan</button>
-                    <a href="{{ route('peristiwa_kelahiran.index') }}" class="btn btn-outline-light px-4">Kembali</a>
+                    {{-- BUTTON --}}
+                    <div class="mt-4">
+                        <button class="btn btn-primary px-4">
+                            Simpan
+                        </button>
+                        <a href="{{ route('peristiwa_kelahiran.index') }}" class="btn btn-outline-light px-4">
+                            Kembali
+                        </a>
+                    </div>
             </form>
 
         </div>
