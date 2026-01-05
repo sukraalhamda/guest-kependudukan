@@ -533,11 +533,44 @@
                                 <i class="fas fa-lock input-icon"></i>
                                 <input type="password" name="password" id="loginPassword" class="form-control"
                                     placeholder="Masukkan password" required>
-                                <button type="button" class="password-toggle" id="toggleLoginPassword">
+                                <button type="button" class="password-toggle" id="toggleLoginPassword"
+                                    aria-label="Toggle password visibility">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
                         </div>
+
+                        <script>
+                            const toggleLoginPassword = document.getElementById('toggleLoginPassword');
+                            const loginPasswordInput = document.getElementById('loginPassword');
+
+                            toggleLoginPassword.addEventListener('click', function() {
+                                const type = loginPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                                loginPasswordInput.setAttribute('type', type);
+
+                                const icon = this.querySelector('i');
+                                if (type === 'text') {
+                                    icon.classList.remove('fa-eye');
+                                    icon.classList.add('fa-eye-slash');
+                                    this.setAttribute('aria-label', 'Sembunyikan password');
+                                } else {
+                                    icon.classList.remove('fa-eye-slash');
+                                    icon.classList.add('fa-eye');
+                                    this.setAttribute('aria-label', 'Tampilkan password');
+                                }
+
+                                // Fokus kembali ke input setelah toggle
+                                loginPasswordInput.focus();
+                            });
+
+                            // Opsional: Toggle dengan keyboard (Enter/Space)
+                            toggleLoginPassword.addEventListener('keydown', function(e) {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    this.click();
+                                }
+                            });
+                        </script>
 
                         <div class="remember-forgot">
                             <label class="remember-me">
@@ -551,9 +584,9 @@
                             <span id="loginButtonText">Masuk</span>
                             <div class="loading" id="loginLoading"></div>
                         </button>
-                       <div class="signup-footer">
-                        Belum punya akun? <a href="{{ route('signup') }}">Daftar disini</a>
-                    </div>
+                        <div class="signup-footer">
+                            Belum punya akun? <a href="{{ route('signup') }}">Daftar disini</a>
+                        </div>
                     </form>
                 </div>
 

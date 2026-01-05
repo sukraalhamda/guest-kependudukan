@@ -74,10 +74,11 @@
                             <img class="img-fluid" src="{{ asset('asset/img/sukra.jpg') }}" alt="Developer 1">
 
                             <div class="team-social">
-                                <a class="btn btn-square" href="https://www.linkedin.com/" target="_blank">
+                                <a class="btn btn-square" href="https://www.linkedin.com/in/sukra-alhamda13/"
+                                    target="_blank">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
-                                <a class="btn btn-square" href="https://github.com/" target="_blank">
+                                <a class="btn btn-square" href="https://github.com/sukraalhamda" target="_blank">
                                     <i class="fab fa-github"></i>
                                 </a>
                                 <a class="btn btn-square" href="https://www.instagram.com/" target="_blank">
