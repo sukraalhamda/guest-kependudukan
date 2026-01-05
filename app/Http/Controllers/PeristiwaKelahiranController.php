@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Media;
 use App\Models\PeristiwaKelahiran;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Storage;
 
 class PeristiwaKelahiranController extends Controller

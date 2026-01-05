@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Media;
 use App\Models\PeristiwaKematian;
-use App\Models\Warga;
+use App\Models\warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,7 +29,7 @@ class PeristiwaKematianController extends Controller
 
     public function create()
     {
-        $warga = Warga::all();
+        $warga = warga::all();
         return view('pages.peristiwakematian.create', compact('warga'));
     }
 
@@ -77,7 +77,7 @@ class PeristiwaKematianController extends Controller
     public function edit($id)
     {
         $kematian = PeristiwaKematian::with('media')->findOrFail($id);
-        $warga    = Warga::all();
+        $warga    = warga::all();
 
         return view('pages.peristiwakematian.edit', compact('kematian', 'warga'));
     }

@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Media;
 use App\Models\PeristiwaPindah;
-use App\Models\Warga;
+use App\Models\warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,7 +25,7 @@ class PeristiwaPindahController extends Controller
 
     public function create()
     {
-        $warga = Warga::all();
+        $warga = warga::all();
         return view('pages.peristiwapindah.create', compact('warga'));
     }
 
